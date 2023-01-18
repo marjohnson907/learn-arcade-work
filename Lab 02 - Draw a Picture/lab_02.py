@@ -6,7 +6,15 @@ arcade.set_background_color(arcade.csscolor.LIGHT_BLUE)
 arcade.start_render()
 
 # background
-arcade.draw_triangle_filled(0, 300, 599, 300, 300, 599, arcade.csscolor.BEIGE)
+arcade.draw_circle_filled(120, 380, 100, arcade.csscolor.DARK_GREEN)
+arcade.draw_polygon_filled(((0, 0),
+                            (0, 300),
+                            (300, 599),
+                            (599, 300),
+                            (599, 0)
+                            ),
+                           arcade.csscolor.BEIGE)
+
 # woman
 arcade.draw_rectangle_filled(150, 325, 25, 100, arcade.csscolor.WHEAT)
 arcade.draw_ellipse_filled(150, 375, 100, 150, arcade.csscolor.WHEAT)
@@ -34,6 +42,8 @@ arcade.draw_circle_filled(150, 265, 15, arcade.csscolor.GOLD)
 arcade.draw_rectangle_filled(450, 350, 25, 150, arcade.csscolor.WHEAT)
 arcade.draw_ellipse_filled(450, 400, 125, 175, arcade.csscolor.WHEAT)
 arcade.draw_rectangle_filled(450, 140, 300, 280, arcade.csscolor.NAVY)
+arcade.draw_rectangle_filled(450, 140, 150, 280, arcade.csscolor.WHITE)
+arcade.draw_rectangle_filled(450, 100, 150, 200, arcade.csscolor.SKY_BLUE)
 
 arcade.finish_render()
 
