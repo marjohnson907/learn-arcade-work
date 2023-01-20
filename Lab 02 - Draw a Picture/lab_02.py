@@ -12,12 +12,8 @@ arcade.draw_circle_filled(525, 350, 50, arcade.csscolor.DARK_GREEN)
 arcade.draw_circle_filled(575, 300, 60, arcade.csscolor.FOREST_GREEN)
 
 # house
-arcade.draw_polygon_filled(((0, 0),
-                            (0, 300),
-                            (300, 599),
-                            (599, 300),
-                            (599, 0)),
-                           arcade.csscolor.BEIGE)
+arcade.draw_triangle_filled(0, 300, 300, 599, 599, 300, arcade.csscolor.BEIGE)
+arcade.draw_rectangle_filled(300, 150, 600, 300, arcade.csscolor.TAN)
 arcade.draw_line(300, 590, 300, 550, arcade.csscolor.BISQUE, 2)
 arcade.draw_line(300, 400, 300, 375, arcade.csscolor.BISQUE, 2)
 arcade.draw_line(210, 500, 210, 375, arcade.csscolor.BISQUE, 2)
@@ -50,11 +46,21 @@ arcade.draw_polygon_filled(((0, 300),
                             (525, 375),
                             (599, 300)),
                            arcade.csscolor.DARK_GRAY)
+arcade.draw_line(0, 300, 599, 300, arcade.csscolor.BEIGE, 4)
+arcade.draw_lrtb_rectangle_filled(205, 295, 290, 200, arcade.csscolor.ROSY_BROWN)
+arcade.draw_lrtb_rectangle_filled(305, 395, 290, 200, arcade.csscolor.ROSY_BROWN)
+arcade.draw_line(250, 292, 250, 200, arcade.csscolor.TAN, 2)
+arcade.draw_line(350, 292, 350, 200, arcade.csscolor.TAN, 2)
 
 # woman head
 arcade.draw_rectangle_filled(150, 325, 40, 100, arcade.csscolor.WHEAT)
 arcade.draw_ellipse_filled(150, 390, 125, 175, arcade.csscolor.WHEAT)
 arcade.draw_arc_outline(150, 390, 100, 150, arcade.csscolor.YELLOW, 0, 180, 50)
+arcade.draw_line(135, 338, 165, 338, arcade.csscolor.BURLYWOOD, 3)
+arcade.draw_ellipse_filled(125, 390, 30, 10, arcade.csscolor.IVORY)
+arcade.draw_ellipse_filled(175, 390, 30, 10, arcade.csscolor.IVORY)
+arcade.draw_circle_filled(130, 390, 5, arcade.csscolor.SKY_BLUE)
+arcade.draw_circle_filled(180, 390, 5, arcade.csscolor.SKY_BLUE)
 
 # woman body
 arcade.draw_polygon_filled(((0, 0),
@@ -84,6 +90,16 @@ arcade.draw_circle_filled(150, 265, 15, arcade.csscolor.GOLD)
 # man head
 arcade.draw_rectangle_filled(450, 350, 50, 150, arcade.csscolor.WHEAT)
 arcade.draw_ellipse_filled(450, 420, 150, 210, arcade.csscolor.WHEAT)
+arcade.draw_ellipse_filled(375, 420, 25, 50, arcade.csscolor.WHEAT)
+arcade.draw_ellipse_filled(525, 420, 25, 50, arcade.csscolor.WHEAT)
+arcade.draw_circle_outline(420, 435, 25, arcade.csscolor.GRAY)
+arcade.draw_circle_outline(480, 435, 25, arcade.csscolor.GRAY)
+arcade.draw_line(444, 435, 456, 435, arcade.csscolor.GRAY)
+arcade.draw_line(430, 360, 470, 360, arcade.csscolor.BURLYWOOD)
+arcade.draw_ellipse_filled(420, 445, 30, 10, arcade.csscolor.IVORY)
+arcade.draw_ellipse_filled(480, 445, 30, 10, arcade.csscolor.IVORY)
+arcade.draw_circle_filled(420, 445, 5, arcade.csscolor.BLACK)
+arcade.draw_circle_filled(480, 445, 5, arcade.csscolor.BLACK)
 
 # man body
 arcade.draw_rectangle_filled(450, 140, 300, 280, arcade.csscolor.MIDNIGHT_BLUE)
@@ -98,11 +114,6 @@ arcade.draw_line(455, 200, 455, 280, arcade.csscolor.SKY_BLUE)
 arcade.draw_line(415, 200, 415, 280, arcade.csscolor.SKY_BLUE)
 arcade.draw_line(410, 200, 410, 280, arcade.csscolor.SKY_BLUE)
 arcade.draw_line(405, 200, 405, 280, arcade.csscolor.SKY_BLUE)
-
-# man glasses
-arcade.draw_circle_outline(420, 435, 25, arcade.csscolor.GRAY)
-arcade.draw_circle_outline(480, 435, 25, arcade.csscolor.GRAY)
-arcade.draw_line(444, 435, 456, 435, arcade.csscolor.GRAY)
 
 # man pitchfork
 arcade.draw_line(310, 150, 420, 150, arcade.csscolor.BLACK, 3)
