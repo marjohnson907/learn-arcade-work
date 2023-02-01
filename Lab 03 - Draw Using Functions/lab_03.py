@@ -4,14 +4,29 @@ SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 500
 
 
+def draw_moon():
+    # Moon
+    arcade.draw_circle_filled(70, 430, 25, arcade.color.WHITE_SMOKE)
+    arcade.draw_circle_filled(80, 425, 25, arcade.color.COOL_BLACK)
+
+
+def draw_mountains():
+    # Mountains
+    arcade.draw_triangle_filled(0, 0, 350, 0, 175, 350, arcade.color.JET)
+    arcade.draw_polygon_filled(((100, 0),
+                               (500, 0),
+                               (500, 200),
+                               (350, 450)),
+                               arcade.color.JET)
+
+
 def main():
     arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing with Functions")
     arcade.set_background_color(arcade.color.COOL_BLACK)
     arcade.start_render()
 
-    # Moon
-    arcade.draw_circle_filled(70, 430, 25, arcade.color.WHITE_SMOKE)
-    arcade.draw_circle_filled(80, 425, 25, arcade.color.COOL_BLACK)
+    draw_moon()
+    draw_mountains()
 
     # Second row trees
     arcade.draw_triangle_filled(75, 0, 225, 0, 150, 140, arcade.color.DARK_GREEN)
@@ -41,7 +56,27 @@ def main():
     arcade.draw_triangle_filled(395, 165, 455, 165, 425, 210, arcade.color.DARK_JUNGLE_GREEN)
 
     # Bridge
-    arcade.draw_lrtb_rectangle_filled(0, SCREEN_WIDTH, 250, 230, arcade.color.EERIE_BLACK)
+    arcade.draw_lrtb_rectangle_filled(0, SCREEN_WIDTH, 270, 260, arcade.color.EERIE_BLACK)
+    arcade.draw_line(2, 0, 2, 260, arcade.color.EERIE_BLACK, 3)
+    arcade.draw_line(100, 0, 100, 260, arcade.color.EERIE_BLACK, 5)
+    arcade.draw_line(200, 0, 200, 260, arcade.color.EERIE_BLACK, 5)
+    arcade.draw_line(300, 0, 300, 260, arcade.color.EERIE_BLACK, 5)
+    arcade.draw_line(400, 0, 400, 260, arcade.color.EERIE_BLACK, 5)
+    arcade.draw_line(498, 0, 498, 260, arcade.color.EERIE_BLACK, 3)
+    arcade.draw_arc_outline(50, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
+    arcade.draw_arc_outline(150, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
+    arcade.draw_arc_outline(250, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
+    arcade.draw_arc_outline(350, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
+    arcade.draw_arc_outline(450, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
+
+    # Train
+    arcade.draw_rectangle_filled(60, 285, 125, 25, arcade.color.WHITE)
+    arcade.draw_rectangle_filled(190, 285, 125, 25, arcade.color.WHITE)
+    arcade.draw_polygon_filled(((400, 285),
+                                (300, 285),
+                                (300, 310),
+                                (400, 310)),
+                               arcade.color.GOLD)
 
     # Finish and run
     arcade.finish_render()
