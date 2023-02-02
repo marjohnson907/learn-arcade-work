@@ -20,6 +20,19 @@ def draw_mountains():
                                arcade.color.JET)
 
 
+def draw_tree(x, y):
+    # First row trees
+    arcade.draw_triangle_filled(x - 75, y, x + 75, y, x, y + 150, arcade.color.DARK_JUNGLE_GREEN)
+    arcade.draw_triangle_filled(x - 50, y + 75, x + 50, y + 75, x, y + 175, arcade.color.DARK_JUNGLE_GREEN)
+    arcade.draw_triangle_filled(x - 40, y + 125, x + 45, y + 125, x, y + 200, arcade.color.DARK_JUNGLE_GREEN)
+    arcade.draw_triangle_filled(x - 30, y + 165, x + 30, y + 165, x, y + 210, arcade.color.DARK_JUNGLE_GREEN)
+
+
+def draw_star(x, y):
+    # stars
+    arcade.draw_point(x, y, arcade.color.WHITE, 3)
+
+
 def main():
     arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing with Functions")
     arcade.set_background_color(arcade.color.COOL_BLACK)
@@ -40,20 +53,10 @@ def main():
     arcade.draw_triangle_filled(320, 175, 380, 175, 350, 220, arcade.color.DARK_GREEN)
 
     # First row trees
-    arcade.draw_triangle_filled(0, 0, 150, 0, 75, 150, arcade.color.DARK_JUNGLE_GREEN)
-    arcade.draw_triangle_filled(25, 75, 125, 75, 75, 175, arcade.color.DARK_JUNGLE_GREEN)
-    arcade.draw_triangle_filled(35, 125, 115, 125, 75, 200, arcade.color.DARK_JUNGLE_GREEN)
-    arcade.draw_triangle_filled(45, 165, 105, 165, 75, 210, arcade.color.DARK_JUNGLE_GREEN)
+    draw_tree(75, 0)
+    draw_tree(250, 0)
+    draw_tree(425, 0)
 
-    arcade.draw_triangle_filled(175, 0, 325, 0, 250, 150, arcade.color.DARK_JUNGLE_GREEN)
-    arcade.draw_triangle_filled(200, 75, 300, 75, 250, 175, arcade.color.DARK_JUNGLE_GREEN)
-    arcade.draw_triangle_filled(210, 125, 290, 125, 250, 200, arcade.color.DARK_JUNGLE_GREEN)
-    arcade.draw_triangle_filled(220, 165, 280, 165, 250, 210, arcade.color.DARK_JUNGLE_GREEN)
-
-    arcade.draw_triangle_filled(350, 0, 500, 0, 425, 150, arcade.color.DARK_JUNGLE_GREEN)
-    arcade.draw_triangle_filled(375, 75, 475, 75, 425, 175, arcade.color.DARK_JUNGLE_GREEN)
-    arcade.draw_triangle_filled(385, 125, 465, 125, 425, 200, arcade.color.DARK_JUNGLE_GREEN)
-    arcade.draw_triangle_filled(395, 165, 455, 165, 425, 210, arcade.color.DARK_JUNGLE_GREEN)
 
     # Bridge
     arcade.draw_lrtb_rectangle_filled(0, SCREEN_WIDTH, 270, 260, arcade.color.EERIE_BLACK)
@@ -70,13 +73,30 @@ def main():
     arcade.draw_arc_outline(450, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
 
     # Train
-    arcade.draw_rectangle_filled(60, 285, 125, 25, arcade.color.WHITE)
-    arcade.draw_rectangle_filled(190, 285, 125, 25, arcade.color.WHITE)
-    arcade.draw_polygon_filled(((400, 285),
-                                (300, 285),
-                                (300, 310),
-                                (400, 310)),
-                               arcade.color.GOLD)
+    arcade.draw_line(0, 278, 257, 278, arcade.color.SMOKY_BLACK, 2)
+    arcade.draw_rectangle_filled(60, 285, 125, 25, arcade.color.SMOKY_BLACK)
+    arcade.draw_rectangle_filled(190, 285, 125, 25, arcade.color.SMOKY_BLACK)
+    arcade.draw_polygon_filled(((257, 273),
+                                (257, 298),
+                                (332, 298),
+                                (332, 290),
+                                (357, 290),
+                                (357, 273)),
+                               arcade.color.SMOKY_BLACK)
+    arcade.draw_triangle_filled(356, 288, 500, 273, 500, 303, arcade.color.SUNGLOW)
+
+    draw_star(80, 330)
+    draw_star(20, 355)
+    draw_star(35, 222)
+    draw_star(23, 100)
+    draw_star(130, 400)
+    draw_star(209, 480)
+    draw_star(272, 412)
+    draw_star(250, 325)
+    draw_star(416, 477)
+    draw_star(482, 425)
+    draw_star(458, 319)
+
 
     # Finish and run
     arcade.finish_render()
