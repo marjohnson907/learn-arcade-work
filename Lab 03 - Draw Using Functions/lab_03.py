@@ -4,10 +4,10 @@ SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 500
 
 
-def draw_moon():
+def draw_moon(x, y):
     # Moon
-    arcade.draw_circle_filled(70, 430, 25, arcade.color.WHITE_SMOKE)
-    arcade.draw_circle_filled(80, 425, 25, arcade.color.COOL_BLACK)
+    arcade.draw_circle_filled(x, y, 25, arcade.color.WHITE_SMOKE)
+    arcade.draw_circle_filled(x + 10, y - 5, 25, arcade.color.COOL_BLACK)
 
 
 def draw_mountains():
@@ -20,12 +20,56 @@ def draw_mountains():
                                arcade.color.JET)
 
 
+def draw_background_trees():
+    # Second row trees
+    arcade.draw_triangle_filled(75, 0, 225, 0, 150, 120, arcade.color.DARK_GREEN)
+    arcade.draw_triangle_filled(100, 45, 200, 45, 150, 145, arcade.color.DARK_GREEN)
+    arcade.draw_triangle_filled(110, 95, 190, 95, 150, 170, arcade.color.DARK_GREEN)
+    arcade.draw_triangle_filled(120, 135, 180, 135, 150, 180, arcade.color.DARK_GREEN)
+
+    arcade.draw_triangle_filled(275, 0, 425, 0, 350, 170, arcade.color.DARK_GREEN)
+    arcade.draw_triangle_filled(300, 95, 400, 95, 350, 195, arcade.color.DARK_GREEN)
+    arcade.draw_triangle_filled(310, 135, 390, 135, 350, 220, arcade.color.DARK_GREEN)
+    arcade.draw_triangle_filled(320, 180, 380, 180, 350, 240, arcade.color.DARK_GREEN)
+
+
 def draw_tree(x, y):
     # First row trees
     arcade.draw_triangle_filled(x - 75, y, x + 75, y, x, y + 150, arcade.color.DARK_JUNGLE_GREEN)
     arcade.draw_triangle_filled(x - 50, y + 75, x + 50, y + 75, x, y + 175, arcade.color.DARK_JUNGLE_GREEN)
     arcade.draw_triangle_filled(x - 40, y + 125, x + 45, y + 125, x, y + 200, arcade.color.DARK_JUNGLE_GREEN)
     arcade.draw_triangle_filled(x - 30, y + 165, x + 30, y + 165, x, y + 210, arcade.color.DARK_JUNGLE_GREEN)
+
+
+def draw_bridge():
+    # Bridge
+    arcade.draw_lrtb_rectangle_filled(0, SCREEN_WIDTH, 270, 260, arcade.color.EERIE_BLACK)
+    arcade.draw_line(2, 0, 2, 260, arcade.color.EERIE_BLACK, 3)
+    arcade.draw_line(100, 0, 100, 260, arcade.color.EERIE_BLACK, 5)
+    arcade.draw_line(200, 0, 200, 260, arcade.color.EERIE_BLACK, 5)
+    arcade.draw_line(300, 0, 300, 260, arcade.color.EERIE_BLACK, 5)
+    arcade.draw_line(400, 0, 400, 260, arcade.color.EERIE_BLACK, 5)
+    arcade.draw_line(498, 0, 498, 260, arcade.color.EERIE_BLACK, 3)
+    arcade.draw_arc_outline(50, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
+    arcade.draw_arc_outline(150, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
+    arcade.draw_arc_outline(250, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
+    arcade.draw_arc_outline(350, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
+    arcade.draw_arc_outline(450, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
+
+
+def draw_train(x, y):
+    # Train
+    arcade.draw_line(x- 356, y - 10, x - 100, y - 10, arcade.color.SMOKY_BLACK, 2)
+    arcade.draw_rectangle_filled(x - 295, y - 3, 125, 25, arcade.color.SMOKY_BLACK)
+    arcade.draw_rectangle_filled(x - 165, y - 3, 125, 25, arcade.color.SMOKY_BLACK)
+    arcade.draw_polygon_filled(((x - 100, y - 15),
+                                (x - 100, y + 10),
+                                (x - 25, y + 10),
+                                (x - 25, y + 2),
+                                (x + 1, y + 2),
+                                (x + 1, y - 15)),
+                               arcade.color.SMOKY_BLACK)
+    arcade.draw_triangle_filled(x, y, x + 140, y - 15, x + 140, y + 15, arcade.color.SUNGLOW)
 
 
 def draw_star(x, y):
@@ -43,7 +87,7 @@ def draw_comet(x, y):
 def on_draw(delta_time):
     arcade.start_render()
 
-    draw_moon()
+    draw_moon(80, 435)
 
     # Stars
     draw_star(80, 330)
@@ -60,55 +104,18 @@ def on_draw(delta_time):
 
     draw_comet(on_draw.comet1_x, 360)
     draw_mountains()
+    draw_background_trees()
 
     on_draw.comet1_x += 1
-
-    # Second row trees
-    arcade.draw_triangle_filled(75, 0, 225, 0, 150, 140, arcade.color.DARK_GREEN)
-    arcade.draw_triangle_filled(100, 65, 200, 65, 150, 165, arcade.color.DARK_GREEN)
-    arcade.draw_triangle_filled(110, 115, 190, 115, 150, 190, arcade.color.DARK_GREEN)
-    arcade.draw_triangle_filled(120, 155, 180, 155, 150, 200, arcade.color.DARK_GREEN)
-
-    arcade.draw_triangle_filled(275, 0, 425, 0, 350, 150, arcade.color.DARK_GREEN)
-    arcade.draw_triangle_filled(300, 75, 400, 75, 350, 175, arcade.color.DARK_GREEN)
-    arcade.draw_triangle_filled(310, 125, 390, 125, 350, 200, arcade.color.DARK_GREEN)
-    arcade.draw_triangle_filled(320, 175, 380, 175, 350, 220, arcade.color.DARK_GREEN)
+    on_draw.train1_x += 1
 
     # First row trees
     draw_tree(75, 0)
     draw_tree(250, 0)
     draw_tree(425, 0)
 
-    # Bridge
-    arcade.draw_lrtb_rectangle_filled(0, SCREEN_WIDTH, 270, 260, arcade.color.EERIE_BLACK)
-    arcade.draw_line(2, 0, 2, 260, arcade.color.EERIE_BLACK, 3)
-    arcade.draw_line(100, 0, 100, 260, arcade.color.EERIE_BLACK, 5)
-    arcade.draw_line(200, 0, 200, 260, arcade.color.EERIE_BLACK, 5)
-    arcade.draw_line(300, 0, 300, 260, arcade.color.EERIE_BLACK, 5)
-    arcade.draw_line(400, 0, 400, 260, arcade.color.EERIE_BLACK, 5)
-    arcade.draw_line(498, 0, 498, 260, arcade.color.EERIE_BLACK, 3)
-    arcade.draw_arc_outline(50, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
-    arcade.draw_arc_outline(150, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
-    arcade.draw_arc_outline(250, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
-    arcade.draw_arc_outline(350, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
-    arcade.draw_arc_outline(450, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
-
-    # Train
-    arcade.draw_line(0, 278, 257, 278, arcade.color.SMOKY_BLACK, 2)
-    arcade.draw_rectangle_filled(60, 285, 125, 25, arcade.color.SMOKY_BLACK)
-    arcade.draw_rectangle_filled(190, 285, 125, 25, arcade.color.SMOKY_BLACK)
-    arcade.draw_polygon_filled(((257, 273),
-                                (257, 298),
-                                (332, 298),
-                                (332, 290),
-                                (357, 290),
-                                (357, 273)),
-                               arcade.color.SMOKY_BLACK)
-    arcade.draw_lrtb_rectangle_filled(323, 329, 295, 291, arcade.color.ROYAL_YELLOW)
-    arcade.draw_triangle_filled(356, 288, 500, 273, 500, 303, arcade.color.SUNGLOW)
-
-
-on_draw.comet1_x = 0
+    draw_bridge()
+    draw_train(on_draw.train1_x, 288)
 
 
 def main():
@@ -121,5 +128,10 @@ def main():
     # arcade.finish_render()
     arcade.run()
 
+
+# Comet
+on_draw.comet1_x = 0
+# Train
+on_draw.train1_x = 100
 # Call the main function
 main()
