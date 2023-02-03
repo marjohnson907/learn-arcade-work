@@ -40,13 +40,30 @@ def draw_comet(x, y):
     arcade.draw_circle_filled(x, y, 10, arcade.color.RAZZLE_DAZZLE_ROSE)
 
 
-
 def on_draw(delta_time):
     arcade.start_render()
 
     draw_moon()
-    draw_comet(150, 375)
+
+    # Stars
+    draw_star(80, 330)
+    draw_star(20, 355)
+    draw_star(35, 222)
+    draw_star(23, 100)
+    draw_star(130, 400)
+    draw_star(209, 480)
+    draw_star(272, 412)
+    draw_star(250, 325)
+    draw_star(416, 477)
+    draw_star(482, 425)
+    draw_star(458, 319)
+
+    draw_comet(on_draw.comet1_x, 360)
     draw_mountains()
+
+    # Add one to the x value, making the snow person move right
+    # Negative numbers move left. Larger numbers move faster.
+    on_draw.comet1_x += 1
 
     # Second row trees
     arcade.draw_triangle_filled(75, 0, 225, 0, 150, 140, arcade.color.DARK_GREEN)
@@ -89,20 +106,12 @@ def on_draw(delta_time):
                                 (357, 290),
                                 (357, 273)),
                                arcade.color.SMOKY_BLACK)
+    arcade.draw_lrtb_rectangle_filled(323, 329, 295, 291, arcade.color.ROYAL_YELLOW)
     arcade.draw_triangle_filled(356, 288, 500, 273, 500, 303, arcade.color.SUNGLOW)
 
-    # Stars
-    draw_star(80, 330)
-    draw_star(20, 355)
-    draw_star(35, 222)
-    draw_star(23, 100)
-    draw_star(130, 400)
-    draw_star(209, 480)
-    draw_star(272, 412)
-    draw_star(250, 325)
-    draw_star(416, 477)
-    draw_star(482, 425)
-    draw_star(458, 319)
+
+# Create a value that our on_draw.snow_person1_x will start at.
+on_draw.comet1_x = 0
 
 
 def main():
@@ -111,9 +120,8 @@ def main():
 
     arcade.schedule(on_draw, 1/60)
 
-
     # Finish and run
-    #arcade.finish_render()
+    # arcade.finish_render()
     arcade.run()
 
 # Call the main function
