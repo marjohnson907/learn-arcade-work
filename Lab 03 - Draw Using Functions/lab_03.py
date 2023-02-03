@@ -61,8 +61,6 @@ def on_draw(delta_time):
     draw_comet(on_draw.comet1_x, 360)
     draw_mountains()
 
-    # Add one to the x value, making the snow person move right
-    # Negative numbers move left. Larger numbers move faster.
     on_draw.comet1_x += 1
 
     # Second row trees
@@ -110,7 +108,6 @@ def on_draw(delta_time):
     arcade.draw_triangle_filled(356, 288, 500, 273, 500, 303, arcade.color.SUNGLOW)
 
 
-# Create a value that our on_draw.snow_person1_x will start at.
 on_draw.comet1_x = 0
 
 
