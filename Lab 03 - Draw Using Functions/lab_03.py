@@ -33,12 +33,19 @@ def draw_star(x, y):
     arcade.draw_point(x, y, arcade.color.WHITE, 3)
 
 
-def main():
-    arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing with Functions")
-    arcade.set_background_color(arcade.color.COOL_BLACK)
+def draw_comet(x, y):
+    arcade.draw_triangle_filled(x, y + 15, x, y - 15, x - 125, y, arcade.color.ELECTRIC_PURPLE)
+    arcade.draw_circle_filled(x, y, 20, arcade.color.ELECTRIC_LAVENDER)
+    arcade.draw_circle_filled(x, y, 15, arcade.color.PALE_MAGENTA)
+    arcade.draw_circle_filled(x, y, 10, arcade.color.RAZZLE_DAZZLE_ROSE)
+
+
+
+def on_draw(delta_time):
     arcade.start_render()
 
     draw_moon()
+    draw_comet(150, 375)
     draw_mountains()
 
     # Second row trees
@@ -56,7 +63,6 @@ def main():
     draw_tree(75, 0)
     draw_tree(250, 0)
     draw_tree(425, 0)
-
 
     # Bridge
     arcade.draw_lrtb_rectangle_filled(0, SCREEN_WIDTH, 270, 260, arcade.color.EERIE_BLACK)
@@ -85,6 +91,7 @@ def main():
                                arcade.color.SMOKY_BLACK)
     arcade.draw_triangle_filled(356, 288, 500, 273, 500, 303, arcade.color.SUNGLOW)
 
+    # Stars
     draw_star(80, 330)
     draw_star(20, 355)
     draw_star(35, 222)
@@ -98,8 +105,15 @@ def main():
     draw_star(458, 319)
 
 
+def main():
+    arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing with Functions")
+    arcade.set_background_color(arcade.color.COOL_BLACK)
+
+    arcade.schedule(on_draw, 1/60)
+
+
     # Finish and run
-    arcade.finish_render()
+    #arcade.finish_render()
     arcade.run()
 
 # Call the main function
