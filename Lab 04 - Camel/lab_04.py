@@ -49,6 +49,14 @@ Q. Quit.""")
             camel_tired = camel_tired + 1
             print("The natives are ", miles_traveled - (natives_distance + random.randint(7, 14)), "miles behind you.")
 
+        elif user_choice.upper() == "A":
+            if canteen_drinks >= 1:
+                thirst = 0
+                canteen_drinks = canteen_drinks - 1
+            elif canteen_drinks < 1:
+                print("Your canteen is dry.")
+
+
 
 
 
