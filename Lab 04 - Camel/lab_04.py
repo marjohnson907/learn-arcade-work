@@ -42,12 +42,22 @@ Q. Quit.""")
             thirst = thirst + 1
             camel_tired = camel_tired + random.randint(1, 3)
             print("The natives are ",miles_traveled - (natives_distance + random.randint(7, 14)), "miles behind you.")
+            if random.randrange(21) == 1:
+                print("You have found an oasis!")
+                thirst = 0
+                camel_tired = 0
+                canteen_drinks = 5
 
         elif user_choice.upper() == "B":
             print("You have traveled ", miles_traveled + random.randint(5, 12), " miles.")
             thirst = thirst + 1
             camel_tired = camel_tired + 1
             print("The natives are ", miles_traveled - (natives_distance + random.randint(7, 14)), "miles behind you.")
+            if random.randrange(21) == 1:
+                print("You have found an oasis!")
+                thirst = 0
+                camel_tired = 0
+                canteen_drinks = 5
 
         elif user_choice.upper() == "A":
             if canteen_drinks >= 1:
@@ -56,25 +66,25 @@ Q. Quit.""")
             elif canteen_drinks < 1:
                 print("Your canteen is dry.")
 
-        if thirst > 4:
+        if not done and thirst > 4:
             print("You are thirsty.")
-        elif thirst > 6:
+        elif not done and thirst > 6:
             print("You died of thirst!")
             done = True
 
-        if camel_tired >= 5:
+        if not done and camel_tired >= 5:
             print("Your camel is tired.")
-        elif camel_tired > 8:
+        elif not done and camel_tired > 8:
             print("Your camel is dead.")
             done = True
 
-        if miles_traveled - natives_distance < 15:
+        if not done and miles_traveled - natives_distance < 15:
             print("The natives are getting close!")
-        elif miles_traveled - natives_distance < 1:
+        elif not done and miles_traveled - natives_distance < 1:
             print("The natives caught you.")
             done = True
 
-        if miles_traveled >= 200:
+        if not done and miles_traveled >= 200:
             print("You won the game!")
             done = True
 
