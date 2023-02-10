@@ -48,7 +48,7 @@ Q. Quit.""")
                 canteen_drinks = 5
 
         elif user_choice.upper() == "C":
-            miles_traveled = miles_traveled + random.randint(5, 12)
+            miles_traveled = miles_traveled + random.randint(10, 20)
             print("You have traveled ", miles_traveled, " miles.")
             thirst = thirst + 1
             camel_tired = camel_tired + random.randint(1, 3)
@@ -71,6 +71,12 @@ Q. Quit.""")
             print("Drinks in canteen: ", canteen_drinks)
             print("The natives are ", (miles_traveled - natives_distance), "miles behind you.")
 
+        if not done and miles_traveled - natives_distance < 15 and miles_traveled - natives_distance > 1:
+            print("The natives are getting close!")
+        elif not done and miles_traveled - natives_distance < 1:
+            print("The natives caught you.")
+            done = True
+
         if not done and thirst > 4 and thirst <= 6:
             print("You are thirsty.")
         elif not done and thirst > 6:
@@ -81,12 +87,6 @@ Q. Quit.""")
             print("Your camel is tired.")
         elif not done and camel_tired > 8:
             print("Your camel is dead.")
-            done = True
-
-        if not done and miles_traveled - natives_distance < 15 and miles_traveled - natives_distance > 1:
-            print("The natives are getting close!")
-        elif not done and miles_traveled - natives_distance < 1:
-            print("The natives caught you.")
             done = True
 
         if not done and miles_traveled >= 200:
