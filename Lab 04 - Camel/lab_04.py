@@ -1,10 +1,4 @@
-import arcade
-
-miles_traveled = 0
-thirst = 0
-camel_tired = 0
-canteen_drinks = 3
-natives_distance = -20
+import random
 
 
 def main():
@@ -12,6 +6,12 @@ def main():
     print("""You have stolen a camel to make your way across the great Mobi desert.
 The natives want their camel back and are chasing you down! 
 Survive your desert trek and out run the natives.""")
+
+    miles_traveled = 0
+    thirst = 0
+    camel_tired = 0
+    canteen_drinks = 3
+    natives_distance = -20
 
     done = False
     while not done:
@@ -26,19 +26,31 @@ Q. Quit.""")
         if user_choice.upper() == "Q":
             print("You have quit.")
             done = True
+
+        elif user_choice.upper() == "E":
+            print("You have traveled ", miles_traveled, " miles.")
+            print("Drinks in canteen: ", canteen_drinks)
+            print("The natives are ", (miles_traveled - natives_distance), "miles behind you.")
+
         elif user_choice.upper() == "D":
             camel_tired = 0
             print("Your camel is happy.")
-            natives_distance = natives_distance + 13
-            print("The natives are ", miles_traveled - natives_distance, " miles behind you.")
+            print("The natives are ", miles_traveled - (natives_distance + random.randint(7, 14)), " miles behind you.")
+
         elif user_choice.upper() == "C":
-            miles_traveled = miles_traveled + 12
-            print(miles_traveled)
+            print("You have traveled ", miles_traveled + random.randint(10, 20), " miles.")
             thirst = thirst + 1
-            camel_tired = camel_tired + 2
-            natives_distance = natives_distance + 13
-            print("The natives are ",miles_traveled - natives_distance, "miles behind you.")
-            done = True
+            camel_tired = camel_tired + random.randint(1, 3)
+            print("The natives are ",miles_traveled - (natives_distance + random.randint(7, 14)), "miles behind you.")
+
+        elif user_choice.upper() == "B":
+            print("You have traveled ", miles_traveled + random.randint(5, 12), " miles.")
+            thirst = thirst + 1
+            camel_tired = camel_tired + 1
+            print("The natives are ", miles_traveled - (natives_distance + random.randint(7, 14)), "miles behind you.")
+
+
+
 
 
 
