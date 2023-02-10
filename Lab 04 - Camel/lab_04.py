@@ -56,6 +56,28 @@ Q. Quit.""")
             elif canteen_drinks < 1:
                 print("Your canteen is dry.")
 
+        if thirst > 4:
+            print("You are thirsty.")
+        elif thirst > 6:
+            print("You died of thirst!")
+            done = True
+
+        if camel_tired >= 5:
+            print("Your camel is tired.")
+        elif camel_tired > 8:
+            print("Your camel is dead.")
+            done = True
+
+        if miles_traveled - natives_distance < 15:
+            print("The natives are getting close!")
+        elif miles_traveled - natives_distance < 1:
+            print("The natives caught you.")
+            done = True
+
+        if miles_traveled >= 200:
+            print("You won the game!")
+            done = True
+
 
 
 
