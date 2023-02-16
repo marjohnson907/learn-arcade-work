@@ -29,9 +29,12 @@ def draw_section_2():
     # Don't loop from 30 to 60 to shift everything over, just add 300 to x.
     for row in range(30):
         for column in range(30):
-            x = (column + 300.5) * 10
-            y = (row + 300.5) * 10
-            arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.BLACK)
+            x = ((column + .5) * 10) + 300
+            y = (row + .5) * 10
+            if column % 2 == 0:
+                arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
+            else:
+                arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.BLACK)
 
 
 def draw_section_3():
