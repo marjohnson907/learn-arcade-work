@@ -89,10 +89,11 @@ def draw_section_7():
 
 def draw_section_8():
     for row in range(30):
-        for column in range(row):
-            x = ((column + .5) * 10) + 900
-            y = ((row + .5) * 10) + 300
+        for column in range(row - 1):
+            x = ((((column + .5) * 10) + 900))
+            y = (((row + .5) * 10) + 300)
             arcade.draw_rectangle_filled(x, y, 5, 5, arcade.color.WHITE)
+
 
 
 def main():
