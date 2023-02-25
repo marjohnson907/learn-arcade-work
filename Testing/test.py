@@ -1,38 +1,40 @@
-class Address:
-    """ Hold all the fields for a mailing address. """
-    def __init__(self):
-        """ Set up the address fields. """
-        self.name = ""
-        self.line1 = ""
-        self.line2 = ""
-        self.city = ""
-        self.state = ""
-        self.zip = ""
+# variables
+#       Class: attributes (variables) & methods (functions)
+# functions
+# code
 
-def main():
-    # Create an address
-    home_address = Address()
+# What is the difference between placing attributes inside parentheses versus the self.attribute = "whatever"
 
-    # Set the fields in the address
-    home_address.name = "John Smith"
-    home_address.line1 = "701 N. C Street"
-    home_address.line2 = "Carver Science Building"
-    home_address.city = "Indianola"
-    home_address.state = "IA"
-    home_address.zip = "50125"
+class Character:
+    def __init__(self, p_first_name, p_last_name, p_outfit):
+        self.first_name = p_first_name
+        self.last_name = p_last_name
+        self.outfit = p_outfit
+        self.max_hit_points = 0
+        self.current_hit_points = 0
+        self.armor_amount = 0
+        self.max_speed = 0
 
-    # Create another address
-    vacation_home_address = Address()
+    def set_outfit_color(self, p_color):
+        self.outfit = self.outfit + " Color: " + p_color
 
-    # Set the fields in the address
-    vacation_home_address.name = "John Smith"
-    vacation_home_address.line1 = "1122 Main Street"
-    vacation_home_address.line2 = ""
-    vacation_home_address.city = "Panama City Beach"
-    vacation_home_address.state = "FL"
-    vacation_home_address.zip = "32407"
+first_name = 'no, it is not.'
+Bob = Character("Bob", "Ross", "Painter Pants")
+char1 = Character("Sue", "Someone", "Mechanic Overalls")
+print("Name:", Bob.first_name, Bob.last_name)
+Bob.set_outfit_color("Blue")
 
-    print("The client's main home is in " + home_address.city)
-    print("His vacation home is in " + vacation_home_address.city)
+print("Outfit:", Bob.outfit)
+print("Name:", first_name)
 
-main()
+x = 3
+print("x =", x, "and is of type:", type(x))
+
+x = 3.145
+print("x =", x, "and is of type:", type(x))
+
+x = "Hi there"
+print("x =", x, "and is of type:", type(x))
+
+x = True
+print("x =", x, "and is of type:", type(x))
