@@ -72,7 +72,8 @@ def main():
 
     current_room = 0
 
-    print(room_list)
+
+    print(room_list[current_room])
 
 
 
