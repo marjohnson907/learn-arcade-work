@@ -77,6 +77,13 @@ def main():
     while not done:
         print(" ")
         print(room_list[current_room].description)
+        user_choice = input("Where do you want to go?")
+        if user_choice.lower() == "n" or user_choice.lower() == "north":
+            next_room = room_list[current_room].north
+            if next_room is None:
+                print("You can't go that way.")
+            else:
+                next_room = current_room
 
 
 if __name__ == "__main__":
