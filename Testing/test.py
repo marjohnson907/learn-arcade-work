@@ -1,40 +1,62 @@
-# variables
-#       Class: attributes (variables) & methods (functions)
-# functions
-# code
-
-# What is the difference between placing attributes inside parentheses versus the self.attribute = "whatever"
-
 class Character:
-    def __init__(self, p_first_name, p_last_name, p_outfit):
-        self.first_name = p_first_name
-        self.last_name = p_last_name
-        self.outfit = p_outfit
+    def __init__(self):
+        self.name = ""
+        self.outfit = ""
         self.max_hit_points = 0
         self.current_hit_points = 0
         self.armor_amount = 0
         self.max_speed = 0
 
-    def set_outfit_color(self, p_color):
-        self.outfit = self.outfit + " Color: " + p_color
 
-first_name = 'no, it is not.'
-Bob = Character("Bob", "Ross", "Painter Pants")
-char1 = Character("Sue", "Someone", "Mechanic Overalls")
-print("Name:", Bob.first_name, Bob.last_name)
-Bob.set_outfit_color("Blue")
+class Address:
+    def __init__(self):
+        self.name = ""
+        self.line1 = ""
+        self.line2 = ""
+        self.city = ""
+        self.state = ""
+        self.zip = ""
 
-print("Outfit:", Bob.outfit)
-print("Name:", first_name)
+def print_address(address):
+    """ Print an address to the screen """
 
-x = 3
-print("x =", x, "and is of type:", type(x))
+    print(address.name)
+    # If there is a line1 in the address, print it
+    if len(address.line1) > 0:
+        print(address.line1)
+    # If there is a line2 in the address, print it
+    if len(address.line2) > 0:
+        print( address.line2 )
+    print(address.city + ", " + address.state + " " + address.zip)
 
-x = 3.145
-print("x =", x, "and is of type:", type(x))
+def main():
+    home_address = Address()
 
-x = "Hi there"
-print("x =", x, "and is of type:", type(x))
+    home_address.name = "John Smith"
+    home_address.line1 = "701 N. C Street"
+    home_address.line2 = "Carver Science Building"
+    home_address.city = "Indianola"
+    home_address.state = "IA"
+    home_address.zip = "50125"
 
-x = True
-print("x =", x, "and is of type:", type(x))
+    # Create another address
+    vacation_home_address = Address()
+
+    # Set the fields in the address
+    vacation_home_address.name = "John Smith"
+    vacation_home_address.line1 = "1122 Main Street"
+    vacation_home_address.line2 = ""
+    vacation_home_address.city = "Panama City Beach"
+    vacation_home_address.state = "FL"
+    vacation_home_address.zip = "32407"
+
+    print("The client's main home is in " + home_address.city)
+    print("His vacation home is in " + vacation_home_address.city)
+
+    print_address(home_address)
+    print()
+    print_address(vacation_home_address)
+
+
+
+main()

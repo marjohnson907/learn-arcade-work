@@ -14,69 +14,70 @@ class Room:
 def main():
     room_list = []
 
-    room1 = Room()
-    room1.description = "You are in a stone hall. There are doors to the east and west."
-    room1.north = None
-    room1.south = None
-    room1.east = 2
-    room1.west = 7
-    room_list.append(room1)
+    room = Room()
+    room.description = "You are in a room. There are doors to the north and east."
+    room.north = 3
+    room.south = None
+    room.east = 1
+    room.west = None
+    room_list.append(room)
 
-    room2 = Room()
-    room2.description = "You are in a room. There are doors to the north and west."
-    room2.north = 5
-    room2.south = None
-    room2.east = None
-    room2.west = 1
-    room_list.append(room2)
+    room = Room()
+    room.description = "You are in a stone hall. There are doors to the east and west."
+    room.north = None
+    room.south = None
+    room.east = 2
+    room.west = 0
+    room_list.append(room)
 
-    room3 = Room()
-    room3.description = "You are in a room. There are doors to the south and east."
-    room3.north = None
-    room3.south = 7
-    room3.east = 4
-    room3.west = None
-    room_list.append(room3)
+    room = Room()
+    room.description = "You are in a room. There are doors to the north and west."
+    room.north = 5
+    room.south = None
+    room.east = None
+    room.west = 1
+    room_list.append(room)
 
-    room4 = Room()
-    room4.description = "You are in a hall. There are doors to the east, west, north, and south."
-    room4.north = 6
-    room4.south = 1
-    room4.east = 5
-    room4.west = 3
-    room_list.append(room4)
+    room = Room()
+    room.description = "You are in a room. There are doors to the south and east."
+    room.north = None
+    room.south = 0
+    room.east = 4
+    room.west = None
+    room_list.append(room)
 
-    room5 = Room()
-    room5.description = "You are in a room. There are doors to the west and south."
-    room5.north = None
-    room5.south = 2
-    room5.east = None
-    room5.west = 4
-    room_list.append(room5)
+    room = Room()
+    room.description = "You are in a hall. There are doors to the east, west, north, and south."
+    room.north = 6
+    room.south = 1
+    room.east = 5
+    room.west = 3
+    room_list.append(room)
 
-    room6 = Room()
-    room6.description = "You are on a balcony. There is a door to the south."
-    room6.north = None
-    room6.south = 4
-    room6.east = None
-    room6.west = None
-    room_list.append(room6)
+    room = Room()
+    room.description = "You are in a room. There are doors to the west and south."
+    room.north = None
+    room.south = 2
+    room.east = None
+    room.west = 4
+    room_list.append(room)
 
-    room7 = Room()
-    room7.description = "You are in a room. There are doors to the north and east."
-    room7.north = 3
-    room7.south = None
-    room7.east = 1
-    room7.west = None
-    room_list.append(room7)
+    room = Room()
+    room.description = "You are on a balcony. There is a door to the south."
+    room.north = None
+    room.south = 4
+    room.east = None
+    room.west = None
+    room_list.append(room)
 
     current_room = 0
 
+    done = False
 
-    print(room_list[current_room])
+    while not done:
+        print(" ")
+        print(room_list[current_room].description)
 
 
-
-
-
-main()
+if __name__ == "__main__":
+    main()
