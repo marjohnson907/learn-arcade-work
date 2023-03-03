@@ -77,13 +77,49 @@ def main():
     while not done:
         print(" ")
         print(room_list[current_room].description)
+
         user_choice = input("Where do you want to go?")
+
+        # if user chooses north
         if user_choice.lower() == "n" or user_choice.lower() == "north":
             next_room = room_list[current_room].north
             if next_room is None:
                 print("You can't go that way.")
             else:
                 current_room = next_room
+
+        # if user chooses south
+        elif user_choice.lower() == "s" or user_choice.lower() == "south":
+            next_room = room_list[current_room].south
+            if next_room is None:
+                print("You can't go that way.")
+            else:
+                current_room = next_room
+
+        # if user chooses east
+        elif user_choice.lower() == "e" or user_choice.lower() == "east":
+            next_room = room_list[current_room].east
+            if next_room is None:
+                print("You can't go that way.")
+            else:
+                current_room = next_room
+
+        # if user chooses west
+        elif user_choice.lower() == "w" or user_choice.lower() == "west":
+            next_room = room_list[current_room].west
+            if next_room is None:
+                print("You can't go that way.")
+            else:
+                current_room = next_room
+
+        # to quit
+        elif user_choice.upper() == "Q" or user_choice.upper() == "QUIT":
+            print("You have quit.")
+            done = True
+
+        # if user enters another selection
+        else:
+            print("That is not a valid input.")
 
 
 if __name__ == "__main__":
