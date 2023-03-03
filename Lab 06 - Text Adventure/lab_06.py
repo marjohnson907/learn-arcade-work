@@ -83,7 +83,7 @@ def main():
             if next_room is None:
                 print("You can't go that way.")
             else:
-                next_room = current_room
+                current_room = next_room
 
 
 if __name__ == "__main__":
