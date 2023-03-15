@@ -7,48 +7,104 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
 
-def draw_moon(x, y):
-    # Moon
-    arcade.draw_circle_filled(x, y, 25, arcade.color.WHITE_SMOKE)
-    arcade.draw_circle_filled(x + 10, y - 5, 25, arcade.color.BLACK)
+def draw_sun(x, y):
+    arcade.draw_circle_filled(x, y, 50, arcade.color.WHITE_SMOKE)
 
 
 def draw_mountains():
     # Mountains
-#    arcade.draw_triangle_filled(0, 0, 400, 0, 200, 400, arcade.color.GRAPE)
-    arcade.draw_triangle_filled(0, 0, 350, 0, 175, 350, arcade.color.FRENCH_LILAC)
-    arcade.draw_triangle_filled(175, 0, 575, 0, 375, 500, arcade.color.FRENCH_LILAC)
-    arcade.draw_triangle_filled(400, 0, 800, 0, 600, 400, arcade.color.FRENCH_LILAC)
+    arcade.draw_triangle_filled(175, 100, 575, 100, 375, 450, arcade.color.ROYAL_PURPLE)
+    arcade.draw_triangle_filled(400, 100, 800, 100, 600, 500, arcade.color.ROYAL_PURPLE)
+    arcade.draw_triangle_filled(0, 0, 500, 0, 250, 350, arcade.color.REGALIA)
+    arcade.draw_triangle_filled(200, 0, 750, 0, 475, 450, arcade.color.REGALIA)
+    arcade.draw_polygon_filled(((0, 0),
+                               (0, 200),
+                               (100, 325),
+                               (425, 0)),
+                               arcade.color.REGALIA)
+    arcade.draw_polygon_filled(((800, 0),
+                               (800, 250),
+                               (700, 400),
+                               (400, 0)),
+                               arcade.color.REGALIA)
 
 
 def draw_background_trees():
+    # Back trees
+    arcade.draw_polygon_filled(((0, 0),
+                               (0, 50),
+                               (50, 150),
+                               (100, 50)),
+                               arcade.color.OLD_BURGUNDY)
+    arcade.draw_triangle_filled(5, 110, 95, 110, 50, 200, arcade.color.OLD_BURGUNDY)
+
+    arcade.draw_triangle_filled(95, 0, 155, 0, 125, 190, arcade.color.TAUPE)
+    arcade.draw_triangle_filled(95, 80, 155, 80, 125, 190, arcade.color.TAUPE)
+    arcade.draw_triangle_filled(100, 150, 150, 150, 125, 190, arcade.color.TAUPE)
+
+    arcade.draw_triangle_filled(170, 0, 230, 0, 200, 210, arcade.color.OLD_BURGUNDY)
+    arcade.draw_triangle_filled(170, 80, 230, 80, 200, 210, arcade.color.OLD_BURGUNDY)
+    arcade.draw_triangle_filled(175, 150, 225, 150, 200, 210, arcade.color.OLD_BURGUNDY)
+
+    arcade.draw_triangle_filled(270, 0, 330, 0, 300, 190, arcade.color.OLD_BURGUNDY)
+    arcade.draw_triangle_filled(270, 80, 330, 80, 300, 190, arcade.color.OLD_BURGUNDY)
+    arcade.draw_triangle_filled(275, 150, 325, 150, 300, 190, arcade.color.OLD_BURGUNDY)
+
+    arcade.draw_triangle_filled(370, 0, 430, 0, 400, 200, arcade.color.OLD_BURGUNDY)
+    arcade.draw_triangle_filled(370, 80, 430, 80, 400, 200, arcade.color.OLD_BURGUNDY)
+    arcade.draw_triangle_filled(375, 150, 425, 150, 400, 200, arcade.color.OLD_BURGUNDY)
+
+    arcade.draw_triangle_filled(445, 0, 505, 0, 475, 190, arcade.color.TAUPE)
+    arcade.draw_triangle_filled(445, 80, 505, 80, 475, 190, arcade.color.TAUPE)
+    arcade.draw_triangle_filled(450, 150, 500, 150, 475, 190, arcade.color.TAUPE)
+
+    arcade.draw_triangle_filled(470, 0, 530, 0, 500, 210, arcade.color.OLD_BURGUNDY)
+    arcade.draw_triangle_filled(470, 80, 530, 80, 500, 210, arcade.color.OLD_BURGUNDY)
+    arcade.draw_triangle_filled(475, 150, 525, 150, 500, 210, arcade.color.OLD_BURGUNDY)
+
+    arcade.draw_triangle_filled(535, 0, 605, 0, 575, 190, arcade.color.TAUPE)
+    arcade.draw_triangle_filled(535, 80, 605, 80, 575, 190, arcade.color.TAUPE)
+    arcade.draw_triangle_filled(540, 150, 600, 150, 575, 190, arcade.color.TAUPE)
+
+    arcade.draw_triangle_filled(570, 0, 630, 0, 600, 210, arcade.color.OLD_BURGUNDY)
+    arcade.draw_triangle_filled(570, 80, 630, 80, 600, 210, arcade.color.OLD_BURGUNDY)
+    arcade.draw_triangle_filled(575, 150, 625, 150, 600, 210, arcade.color.OLD_BURGUNDY)
+
+    arcade.draw_polygon_filled(((800, 0),
+                               (800, 150),
+                               (775, 220),
+                               (700, 0)),
+                               arcade.color.OLD_BURGUNDY)
+
+
     # Second row trees
-    arcade.draw_triangle_filled(75, 0, 225, 0, 150, 120, arcade.color.KOMBU_GREEN)
-    arcade.draw_triangle_filled(100, 45, 200, 45, 150, 145, arcade.color.KOMBU_GREEN)
-    arcade.draw_triangle_filled(110, 95, 190, 95, 150, 170, arcade.color.KOMBU_GREEN)
-    arcade.draw_triangle_filled(120, 135, 180, 135, 150, 180, arcade.color.KOMBU_GREEN)
+    arcade.draw_triangle_filled(75, 0, 225, 0, 150, 120, arcade.color.FRENCH_PUCE)
+    arcade.draw_triangle_filled(100, 45, 200, 45, 150, 145, arcade.color.FRENCH_PUCE)
+    arcade.draw_triangle_filled(110, 95, 190, 95, 150, 170, arcade.color.FRENCH_PUCE)
+    arcade.draw_triangle_filled(120, 135, 180, 135, 150, 180, arcade.color.FRENCH_PUCE)
 
-    arcade.draw_triangle_filled(275, 0, 425, 0, 350, 170, arcade.color.KOMBU_GREEN)
-    arcade.draw_triangle_filled(300, 95, 400, 95, 350, 195, arcade.color.KOMBU_GREEN)
-    arcade.draw_triangle_filled(310, 135, 390, 135, 350, 220, arcade.color.KOMBU_GREEN)
-    arcade.draw_triangle_filled(320, 180, 380, 180, 350, 240, arcade.color.KOMBU_GREEN)
+    arcade.draw_triangle_filled(275, 0, 425, 0, 350, 170, arcade.color.FRENCH_PUCE)
+    arcade.draw_triangle_filled(300, 95, 400, 95, 350, 195, arcade.color.FRENCH_PUCE)
+    arcade.draw_triangle_filled(310, 135, 390, 135, 350, 220, arcade.color.FRENCH_PUCE)
+    arcade.draw_triangle_filled(320, 180, 380, 180, 350, 240, arcade.color.FRENCH_PUCE)
 
-    arcade.draw_triangle_filled(475, 0, 625, 0, 550, 120, arcade.color.KOMBU_GREEN)
-    arcade.draw_triangle_filled(500, 45, 600, 45, 550, 145, arcade.color.KOMBU_GREEN)
-    arcade.draw_triangle_filled(510, 95, 590, 95, 550, 170, arcade.color.KOMBU_GREEN)
-    arcade.draw_triangle_filled(520, 135, 580, 135, 550, 180, arcade.color.KOMBU_GREEN)
+    arcade.draw_triangle_filled(475, 0, 625, 0, 550, 120, arcade.color.FRENCH_PUCE)
+    arcade.draw_triangle_filled(500, 45, 600, 45, 550, 145, arcade.color.FRENCH_PUCE)
+    arcade.draw_triangle_filled(510, 95, 590, 95, 550, 170, arcade.color.FRENCH_PUCE)
+    arcade.draw_triangle_filled(520, 135, 580, 135, 550, 180, arcade.color.FRENCH_PUCE)
 
-    arcade.draw_triangle_filled(650, 0, 800, 0, 725, 170, arcade.color.KOMBU_GREEN)
-    arcade.draw_triangle_filled(675, 95, 775, 95, 725, 195, arcade.color.KOMBU_GREEN)
-    arcade.draw_triangle_filled(685, 135, 765, 135, 725, 220, arcade.color.KOMBU_GREEN)
-    arcade.draw_triangle_filled(695, 180, 755, 180, 725, 240, arcade.color.KOMBU_GREEN)
+    arcade.draw_triangle_filled(650, 0, 800, 0, 725, 170, arcade.color.FRENCH_PUCE)
+    arcade.draw_triangle_filled(675, 95, 775, 95, 725, 195, arcade.color.FRENCH_PUCE)
+    arcade.draw_triangle_filled(685, 135, 765, 135, 725, 220, arcade.color.FRENCH_PUCE)
+    arcade.draw_triangle_filled(695, 180, 755, 180, 725, 240, arcade.color.FRENCH_PUCE)
 
 def draw_tree(x, y):
     # First row trees
-    arcade.draw_triangle_filled(x - 75, y, x + 75, y, x, y + 150, arcade.color.LA_SALLE_GREEN)
-    arcade.draw_triangle_filled(x - 50, y + 75, x + 50, y + 75, x, y + 175, arcade.color.LA_SALLE_GREEN)
-    arcade.draw_triangle_filled(x - 40, y + 125, x + 45, y + 125, x, y + 200, arcade.color.LA_SALLE_GREEN)
-    arcade.draw_triangle_filled(x - 30, y + 165, x + 30, y + 165, x, y + 210, arcade.color.LA_SALLE_GREEN)
+    arcade.draw_triangle_filled(x - 75, y, x + 75, y, x, y + 150, arcade.color.SEAL_BROWN)
+    arcade.draw_triangle_filled(x - 50, y + 75, x + 50, y + 75, x, y + 175, arcade.color.SEAL_BROWN)
+    arcade.draw_triangle_filled(x - 40, y + 125, x + 45, y + 125, x, y + 200, arcade.color.SEAL_BROWN)
+    arcade.draw_triangle_filled(x - 30, y + 165, x + 30, y + 165, x, y + 210, arcade.color.SEAL_BROWN)
+
 
 
 def draw_bridge():
@@ -102,35 +158,12 @@ class MyGame(arcade.Window):
 
         # Call the parent class initializer
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
+        arcade.set_background_color(arcade.color.RAZZMIC_BERRY)
 
     def on_draw(self):
         arcade.start_render()
 
-        draw_moon(100, 535)
-
-        # Stars
-        draw_star(80, 330)
-        draw_star(20, 355)
-        draw_star(35, 222)
-        draw_star(23, 100)
-        draw_star(130, 400)
-        draw_star(209, 480)
-        draw_star(272, 412)
-        draw_star(250, 325)
-        draw_star(416, 477)
-        draw_star(482, 425)
-        draw_star(458, 319)
-        draw_star(580, 330)
-        draw_star(620, 555)
-        draw_star(735, 422)
-        draw_star(523, 600)
-        draw_star(730, 400)
-        draw_star(609, 380)
-        draw_star(572, 412)
-        draw_star(250, 325)
-        draw_star(416, 477)
-        draw_star(482, 425)
-        draw_star(458, 319)
+        draw_sun(100, 535)
 
         draw_comet(200, 360)
         draw_mountains()
