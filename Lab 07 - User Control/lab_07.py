@@ -5,6 +5,7 @@ import arcade
 # --- Constants ---
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+MOVEMENT_SPEED = 3
 
 
 def draw_sunset():
@@ -161,7 +162,7 @@ class Bird:
     def draw(self):
         """ Draw the bird with the instance variables we have. """
         arcade.draw_arc_outline(self.position_x - 12, self.position_y, self.width, self.height, self.color, self.start_angle, self.end_angle, self.weight)
-        arcade.draw_arc_outline(self.position_x + 12, self.position_y, self.width, self.height, self.color, self.start_angle, self.end_angle, self.weight)
+        arcade.draw_arc_outline(self.position_x + 13, self.position_y, self.width, self.height, self.color, self.start_angle, self.end_angle, self.weight)
 
 
 class MyGame(arcade.Window):
@@ -179,7 +180,7 @@ class MyGame(arcade.Window):
 
         arcade.set_background_color(arcade.color.PURPLE_PIZZAZZ)
         # Create our ball
-        self.bird = Bird(50, 50, 25, 25, arcade.color.RED_DEVIL, 0, 180, 5)
+        self.bird = Bird(50, 50, 25, 25, arcade.color.WHITE_SMOKE, 0, 180, 5)
 
     def on_draw(self):
         arcade.start_render()
@@ -198,6 +199,13 @@ class MyGame(arcade.Window):
         draw_train(300, 288)
 
         self.bird.draw()
+
+    def on_mouse_motion(self, x, y, dx, dy):
+        """ Called to update our objects.
+        Happens approximately 60 times per second."""
+        self.bird.position_x = x
+        self.bird.position_y = y
+
 
 
 def main():
