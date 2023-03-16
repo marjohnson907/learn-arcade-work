@@ -7,8 +7,11 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
 
-def draw_sun(x, y):
-    arcade.draw_circle_filled(x, y, 50, arcade.color.WHITE_SMOKE)
+def draw_sunset():
+    arcade.draw_rectangle_filled(400, 450, 800, 100, arcade.color.ROYAL_FUCHSIA)
+    arcade.draw_rectangle_filled(400, 350, 800, 100, arcade.color.VIOLET_RED)
+    arcade.draw_rectangle_filled(400, 250, 800, 100, arcade.color.WILD_WATERMELON)
+
 
 
 def draw_mountains():
@@ -115,32 +118,31 @@ def draw_bridge():
     arcade.draw_line(200, 0, 200, 260, arcade.color.EERIE_BLACK, 5)
     arcade.draw_line(300, 0, 300, 260, arcade.color.EERIE_BLACK, 5)
     arcade.draw_line(400, 0, 400, 260, arcade.color.EERIE_BLACK, 5)
-    arcade.draw_line(498, 0, 498, 260, arcade.color.EERIE_BLACK, 3)
+    arcade.draw_line(500, 0, 500, 260, arcade.color.EERIE_BLACK, 5)
+    arcade.draw_line(600, 0, 600, 260, arcade.color.EERIE_BLACK, 5)
+    arcade.draw_line(700, 0, 700, 260, arcade.color.EERIE_BLACK, 5)
+    arcade.draw_line(798, 0, 798, 260, arcade.color.EERIE_BLACK, 3)
     arcade.draw_arc_outline(50, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
     arcade.draw_arc_outline(150, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
     arcade.draw_arc_outline(250, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
     arcade.draw_arc_outline(350, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
     arcade.draw_arc_outline(450, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
-
+    arcade.draw_arc_outline(550, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
+    arcade.draw_arc_outline(650, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
+    arcade.draw_arc_outline(750, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
 
 def draw_train(x, y):
     # Train
-    arcade.draw_line(x- 356, y - 10, x - 100, y - 10, arcade.color.SMOKY_BLACK, 2)
-    arcade.draw_rectangle_filled(x - 295, y - 3, 125, 25, arcade.color.SMOKY_BLACK)
-    arcade.draw_rectangle_filled(x - 165, y - 3, 125, 25, arcade.color.SMOKY_BLACK)
+    arcade.draw_line(x- 356, y - 10, x - 100, y - 10, arcade.color.YANKEES_BLUE, 2)
+    arcade.draw_rectangle_filled(x - 295, y - 3, 125, 25, arcade.color.YANKEES_BLUE)
+    arcade.draw_rectangle_filled(x - 165, y - 3, 125, 25, arcade.color.YANKEES_BLUE)
     arcade.draw_polygon_filled(((x - 100, y - 15),
                                 (x - 100, y + 10),
                                 (x - 25, y + 10),
                                 (x - 25, y + 2),
                                 (x + 1, y + 2),
                                 (x + 1, y - 15)),
-                               arcade.color.SMOKY_BLACK)
-    arcade.draw_triangle_filled(x, y, x + 140, y - 15, x + 140, y + 15, arcade.color.SUNGLOW)
-
-
-def draw_star(x, y):
-    # stars
-    arcade.draw_point(x, y, arcade.color.WHITE, 3)
+                               arcade.color.YANKEES_BLUE)
 
 
 def draw_comet(x, y):
@@ -163,9 +165,7 @@ class MyGame(arcade.Window):
     def on_draw(self):
         arcade.start_render()
 
-        draw_sun(100, 535)
-
-        draw_comet(200, 360)
+        draw_sunset()
         draw_mountains()
         draw_background_trees()
 
