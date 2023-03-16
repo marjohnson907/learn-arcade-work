@@ -5,11 +5,10 @@ import arcade
 # --- Constants ---
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-MOVEMENT_SPEED = 3
 
 
 def draw_sunset():
-    arcade.draw_rectangle_filled(400, 450, 800, 100, arcade.color.RAZZLE_DAZZLE_ROSE)
+    arcade.draw_rectangle_filled(400, 450, 800, 100, arcade.color.ROYAL_FUCHSIA)
     arcade.draw_rectangle_filled(400, 350, 800, 100, arcade.color.VIOLET_RED)
     arcade.draw_rectangle_filled(400, 250, 800, 100, arcade.color.WILD_WATERMELON)
 
@@ -79,7 +78,6 @@ def draw_background_trees():
                                (700, 0)),
                                arcade.color.OLD_BURGUNDY)
 
-
     # Second row trees
     arcade.draw_triangle_filled(75, 0, 225, 0, 150, 120, arcade.color.FRENCH_PUCE)
     arcade.draw_triangle_filled(100, 45, 200, 45, 150, 145, arcade.color.FRENCH_PUCE)
@@ -101,13 +99,13 @@ def draw_background_trees():
     arcade.draw_triangle_filled(685, 135, 765, 135, 725, 220, arcade.color.FRENCH_PUCE)
     arcade.draw_triangle_filled(695, 180, 755, 180, 725, 240, arcade.color.FRENCH_PUCE)
 
+
 def draw_tree(x, y):
     # First row trees
     arcade.draw_triangle_filled(x - 75, y, x + 75, y, x, y + 150, arcade.color.SEAL_BROWN)
     arcade.draw_triangle_filled(x - 50, y + 75, x + 50, y + 75, x, y + 175, arcade.color.SEAL_BROWN)
     arcade.draw_triangle_filled(x - 40, y + 125, x + 45, y + 125, x, y + 200, arcade.color.SEAL_BROWN)
     arcade.draw_triangle_filled(x - 30, y + 165, x + 30, y + 165, x, y + 210, arcade.color.SEAL_BROWN)
-
 
 
 def draw_bridge():
@@ -131,6 +129,7 @@ def draw_bridge():
     arcade.draw_arc_outline(650, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
     arcade.draw_arc_outline(750, 212, 100, 100, arcade.color.EERIE_BLACK, 0, 180, 10)
 
+
 def draw_train(x, y):
     # Train
     arcade.draw_line(x- 356, y - 10, x - 100, y - 10, arcade.color.YANKEES_BLUE, 2)
@@ -145,26 +144,6 @@ def draw_train(x, y):
                                arcade.color.YANKEES_BLUE)
 
 
-class Bird:
-    def __init__(self, position_x, position_y, width, height, color, start_angle, end_angle, weight):
-
-        # Take the parameters of the init function above,
-        # and create instance variables out of them.
-        self.position_x = position_x
-        self.position_y = position_y
-        self.width = width
-        self.height = height
-        self.color = color
-        self.start_angle = start_angle
-        self.end_angle = end_angle
-        self.weight = weight
-
-    def draw(self):
-        """ Draw the bird with the instance variables we have. """
-        arcade.draw_arc_outline(self.position_x - 12, self.position_y, self.width, self.height, self.color, self.start_angle, self.end_angle, self.weight)
-        arcade.draw_arc_outline(self.position_x + 13, self.position_y, self.width, self.height, self.color, self.start_angle, self.end_angle, self.weight)
-
-
 class MyGame(arcade.Window):
     """ Our Custom Window Class"""
 
@@ -173,14 +152,7 @@ class MyGame(arcade.Window):
 
         # Call the parent class initializer
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
-
-        # Make the mouse disappear when it is over the window.
-        # So we just see our object, not the pointer.
-        self.set_mouse_visible(False)
-
-        arcade.set_background_color(arcade.color.PURPLE_PIZZAZZ)
-        # Create our ball
-        self.bird = Bird(50, 50, 25, 25, arcade.color.WHITE_SMOKE, 0, 180, 5)
+        arcade.set_background_color(arcade.color.RAZZMIC_BERRY)
 
     def on_draw(self):
         arcade.start_render()
@@ -197,15 +169,6 @@ class MyGame(arcade.Window):
 
         draw_bridge()
         draw_train(300, 288)
-
-        self.bird.draw()
-
-    def on_mouse_motion(self, x, y, dx, dy):
-        """ Called to update our objects.
-        Happens approximately 60 times per second."""
-        self.bird.position_x = x
-        self.bird.position_y = y
-
 
 
 def main():
