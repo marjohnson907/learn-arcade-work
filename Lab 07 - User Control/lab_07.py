@@ -8,10 +8,9 @@ SCREEN_HEIGHT = 600
 
 
 def draw_sunset():
-    arcade.draw_rectangle_filled(400, 450, 800, 100, arcade.color.ROYAL_FUCHSIA)
+    arcade.draw_rectangle_filled(400, 450, 800, 100, arcade.color.RAZZLE_DAZZLE_ROSE)
     arcade.draw_rectangle_filled(400, 350, 800, 100, arcade.color.VIOLET_RED)
     arcade.draw_rectangle_filled(400, 250, 800, 100, arcade.color.WILD_WATERMELON)
-
 
 
 def draw_mountains():
@@ -145,11 +144,24 @@ def draw_train(x, y):
                                arcade.color.YANKEES_BLUE)
 
 
-def draw_comet(x, y):
-    arcade.draw_triangle_filled(x, y + 15, x, y - 15, x - 125, y, arcade.color.ELECTRIC_PURPLE)
-    arcade.draw_circle_filled(x, y, 20, arcade.color.ELECTRIC_LAVENDER)
-    arcade.draw_circle_filled(x, y, 15, arcade.color.PALE_MAGENTA)
-    arcade.draw_circle_filled(x, y, 10, arcade.color.RAZZLE_DAZZLE_ROSE)
+class Bird:
+    def __init__(self, position_x, position_y, width, height, color, start_angle, end_angle, weight):
+
+        # Take the parameters of the init function above,
+        # and create instance variables out of them.
+        self.position_x = position_x
+        self.position_y = position_y
+        self.width = width
+        self.height = height
+        self.color = color
+        self.start_angle = start_angle
+        self.end_angle = end_angle
+        self.weight = weight
+
+    def draw(self):
+        """ Draw the bird with the instance variables we have. """
+        arcade.draw_arc_outline(self.position_x - 12, self.position_y, self.width, self.height, self.color, self.start_angle, self.end_angle, self.weight)
+        arcade.draw_arc_outline(self.position_x + 12, self.position_y, self.width, self.height, self.color, self.start_angle, self.end_angle, self.weight)
 
 
 class MyGame(arcade.Window):
@@ -160,7 +172,14 @@ class MyGame(arcade.Window):
 
         # Call the parent class initializer
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
-        arcade.set_background_color(arcade.color.RAZZMIC_BERRY)
+
+        # Make the mouse disappear when it is over the window.
+        # So we just see our object, not the pointer.
+        self.set_mouse_visible(False)
+
+        arcade.set_background_color(arcade.color.PURPLE_PIZZAZZ)
+        # Create our ball
+        self.bird = Bird(50, 50, 25, 25, arcade.color.RED_DEVIL, 0, 180, 5)
 
     def on_draw(self):
         arcade.start_render()
@@ -177,6 +196,8 @@ class MyGame(arcade.Window):
 
         draw_bridge()
         draw_train(300, 288)
+
+        self.bird.draw()
 
 
 def main():
