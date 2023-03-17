@@ -186,6 +186,10 @@ class MyGame(arcade.Window):
         # Call the parent class initializer
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
 
+        # Make the mouse disappear when it is over the window.
+        # So we just see our object, not the pointer.
+        self.set_mouse_visible(False)
+
         arcade.set_background_color(arcade.color.RAZZMIC_BERRY)
 
         # Create bird
@@ -208,6 +212,12 @@ class MyGame(arcade.Window):
         draw_train(300, 288)
 
         self.bird.draw()
+
+    def on_mouse_motion(self, x, y, dx, dy):
+        """ Called to update our objects.
+        Happens approximately 60 times per second."""
+        self.bird.position_x = x
+        self.bird.position_y = y
 
 
 def main():
