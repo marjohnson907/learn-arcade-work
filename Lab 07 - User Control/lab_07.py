@@ -191,6 +191,19 @@ class Balloon:
         self.center_y += self.change_y
         self.center_x += self.change_x
 
+        # See if the ball hit the edge of the screen. If so, change direction
+        if self.center_x < self.radius:
+            self.center_x = self.radius
+
+        if self.center_x > SCREEN_WIDTH - self.radius:
+            self.center_x = SCREEN_WIDTH - self.radius
+
+        if self.center_y < self.radius:
+            self.center_y = self.radius
+
+        if self.center_y > SCREEN_HEIGHT - self.radius:
+            self.center_y = SCREEN_HEIGHT - self.radius
+
 
 class Bird:
     def __init__(self, position_x, position_y, width, height, color, start_angle, end_angle, weight):
