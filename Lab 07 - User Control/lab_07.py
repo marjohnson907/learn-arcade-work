@@ -155,6 +155,8 @@ class Balloon:
         self.radius = radius
         self.color = color
 
+        self.error = arcade.load_sound("arcade_resources_sounds_error5.wav")
+
     def draw(self):
         arcade.draw_circle_filled(self.center_x, self.center_y, self.radius, self.color)
         arcade.draw_rectangle_filled(self.center_x,
@@ -187,21 +189,25 @@ class Balloon:
                                    arcade.color.CARNELIAN)
 
     def update(self):
-        # Move the ball
+        # Move the balloon
         self.center_y += self.change_y
         self.center_x += self.change_x
 
-        # See if the ball hit the edge of the screen. If so, change direction
+        # See if the balloon hit the edge of the screen. If so, change direction
         if self.center_x < self.radius:
+            arcade.play_sound(self.error)
             self.center_x = self.radius
 
         if self.center_x > SCREEN_WIDTH - self.radius:
+            arcade.play_sound(self.error)
             self.center_x = SCREEN_WIDTH - self.radius
 
         if self.center_y < self.radius:
+            arcade.play_sound(self.error)
             self.center_y = self.radius
 
         if self.center_y > SCREEN_HEIGHT - self.radius:
+            arcade.play_sound(self.error)
             self.center_y = SCREEN_HEIGHT - self.radius
 
 
@@ -250,6 +256,9 @@ class MyGame(arcade.Window):
         # Make the mouse disappear when it is over the window.
         # So we just see our object, not the pointer.
         self.set_mouse_visible(False)
+
+        # Load the sound when the application starts
+        self.crow_caw = arcade.load_sound("crow_caw.wav")
 
         arcade.set_background_color(arcade.color.RAZZMIC_BERRY)
 
@@ -302,6 +311,16 @@ class MyGame(arcade.Window):
         Happens approximately 60 times per second."""
         self.bird.position_x = x
         self.bird.position_y = y
+
+    def on_mouse_press(self, x, y, button, modifiers):
+        """ Called when the user presses a mouse button. """
+
+        if button == arcade.MOUSE_BUTTON_LEFT:
+            print("Left mouse button pressed at", x, y)
+            arcade.play_sound(self.crow_caw)
+        elif button == arcade.MOUSE_BUTTON_RIGHT:
+            print("Right mouse button pressed at", x, y)
+            arcade.play_sound(self.crow_caw)
 
 
 def main():
