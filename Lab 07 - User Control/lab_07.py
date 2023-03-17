@@ -132,7 +132,7 @@ def draw_bridge():
 
 def draw_train(x, y):
     # Train
-    arcade.draw_line(x- 356, y - 10, x - 100, y - 10, arcade.color.YANKEES_BLUE, 2)
+    arcade.draw_line(x - 356, y - 10, x - 100, y - 10, arcade.color.YANKEES_BLUE, 2)
     arcade.draw_rectangle_filled(x - 295, y - 3, 125, 25, arcade.color.YANKEES_BLUE)
     arcade.draw_rectangle_filled(x - 165, y - 3, 125, 25, arcade.color.YANKEES_BLUE)
     arcade.draw_polygon_filled(((x - 100, y - 15),
@@ -144,6 +144,39 @@ def draw_train(x, y):
                                arcade.color.YANKEES_BLUE)
 
 
+class Bird:
+    def __init__(self, position_x, position_y, width, height, color, start_angle, end_angle, weight):
+
+        # Take the parameters of the init function above,
+        # and create instance variables out of them.
+        self.position_x = position_x
+        self.position_y = position_y
+        self.width = width
+        self.height = height
+        self.color = color
+        self.start_angle = start_angle
+        self.end_angle = end_angle
+        self.weight = weight
+
+    def draw(self):
+        arcade.draw_arc_outline(self.position_x - 7,
+                                self.position_y,
+                                self.width,
+                                self.height,
+                                self.color,
+                                self.start_angle,
+                                self.end_angle,
+                                self.weight)
+        arcade.draw_arc_outline(self.position_x + 8,
+                                self.position_y,
+                                self.width,
+                                self.height,
+                                self.color,
+                                self.start_angle,
+                                self.end_angle,
+                                self.weight)
+
+
 class MyGame(arcade.Window):
     """ Our Custom Window Class"""
 
@@ -152,7 +185,11 @@ class MyGame(arcade.Window):
 
         # Call the parent class initializer
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
+
         arcade.set_background_color(arcade.color.RAZZMIC_BERRY)
+
+        # Create bird
+        self.bird = Bird(300, 400, 15, 15, arcade.color.WHITE_SMOKE, 0, 180, 3)
 
     def on_draw(self):
         arcade.start_render()
@@ -169,6 +206,8 @@ class MyGame(arcade.Window):
 
         draw_bridge()
         draw_train(300, 288)
+
+        self.bird.draw()
 
 
 def main():
