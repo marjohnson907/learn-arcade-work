@@ -5,6 +5,7 @@ import arcade
 # --- Constants ---
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
+MOVEMENT_SPEED = 3
 
 
 def draw_sunset():
@@ -144,6 +145,46 @@ def draw_train(x, y):
                                arcade.color.YANKEES_BLUE)
 
 
+class Balloon:
+    def __init__(self, center_x, center_y, radius, color):
+
+        self.center_x = center_x
+        self.center_y = center_y
+        self.radius = radius
+        self.color = color
+
+    def draw(self):
+        arcade.draw_circle_filled(self.center_x, self.center_y, self.radius, self.color)
+        arcade.draw_rectangle_filled(self.center_x,
+                                     self.center_y - (self.radius * 2),
+                                     self.radius,
+                                     self.radius//2,
+                                     self.color)
+        arcade.draw_line(self.center_x,
+                         self.center_y,
+                         self.center_x,
+                         self.center_y - (self.radius * 2),
+                         self.color,
+                         1)
+        arcade.draw_line(self.center_x - self.radius,
+                         self.center_y,
+                         self.center_x - (self.radius//2),
+                         self.center_y - (self.radius * 2),
+                         self.color,
+                         1)
+        arcade.draw_line(self.center_x + self.radius,
+                         self.center_y,
+                         self.center_x + (self.radius//2),
+                         self.center_y - (self.radius * 2),
+                         self.color,
+                         1)
+        arcade.draw_ellipse_filled(self.center_x,
+                                   self.center_y,
+                                   self.radius//1.5,
+                                   self.radius * 2,
+                                   arcade.color.CARNELIAN)
+
+
 class Bird:
     def __init__(self, position_x, position_y, width, height, color, start_angle, end_angle, weight):
 
@@ -194,6 +235,7 @@ class MyGame(arcade.Window):
 
         # Create bird
         self.bird = Bird(300, 400, 15, 15, arcade.color.WHITE_SMOKE, 0, 180, 3)
+        self.balloon = Balloon(450, 300, 25, arcade.color.BURNT_ORANGE)
 
     def on_draw(self):
         arcade.start_render()
@@ -212,6 +254,7 @@ class MyGame(arcade.Window):
         draw_train(300, 288)
 
         self.bird.draw()
+        self.balloon.draw()
 
     def on_mouse_motion(self, x, y, dx, dy):
         """ Called to update our objects.
