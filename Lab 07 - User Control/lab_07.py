@@ -9,8 +9,8 @@ MOVEMENT_SPEED = 3
 
 
 def draw_sunset():
-    arcade.draw_rectangle_filled(400, 450, 800, 100, arcade.color.ROYAL_FUCHSIA)
-    arcade.draw_rectangle_filled(400, 350, 800, 100, arcade.color.VIOLET_RED)
+    arcade.draw_rectangle_filled(400, 450, 800, 100, arcade.color.BRIGHT_PINK)
+    arcade.draw_rectangle_filled(400, 350, 800, 100, arcade.color.WILD_STRAWBERRY)
     arcade.draw_rectangle_filled(400, 250, 800, 100, arcade.color.WILD_WATERMELON)
 
 
@@ -186,7 +186,7 @@ class Balloon:
                                    self.center_y,
                                    self.radius//1.5,
                                    self.radius * 2,
-                                   arcade.color.CARNELIAN)
+                                   arcade.color.LIBERTY)
 
     def update(self):
         # Move the balloon
@@ -260,11 +260,11 @@ class MyGame(arcade.Window):
         # Load the sound when the application starts
         self.crow_caw = arcade.load_sound("crow_caw.wav")
 
-        arcade.set_background_color(arcade.color.RAZZMIC_BERRY)
+        arcade.set_background_color(arcade.color.RADICAL_RED)
 
         # Create bird
         self.bird = Bird(300, 400, 15, 15, arcade.color.WHITE_SMOKE, 0, 180, 3)
-        self.balloon = Balloon(450, 300, 0, 0, 25, arcade.color.BURNT_ORANGE)
+        self.balloon = Balloon(500, 400, 0, 0, 25, arcade.color.GRAY_BLUE)
 
     def on_draw(self):
         arcade.start_render()
