@@ -146,10 +146,12 @@ def draw_train(x, y):
 
 
 class Balloon:
-    def __init__(self, center_x, center_y, radius, color):
+    def __init__(self, center_x, center_y, change_x, change_y, radius, color):
 
         self.center_x = center_x
         self.center_y = center_y
+        self.change_x = change_x
+        self.change_y = change_y
         self.radius = radius
         self.color = color
 
@@ -183,6 +185,11 @@ class Balloon:
                                    self.radius//1.5,
                                    self.radius * 2,
                                    arcade.color.CARNELIAN)
+
+    def update(self):
+        # Move the ball
+        self.center_y += self.change_y
+        self.center_x += self.change_x
 
 
 class Bird:
@@ -235,7 +242,7 @@ class MyGame(arcade.Window):
 
         # Create bird
         self.bird = Bird(300, 400, 15, 15, arcade.color.WHITE_SMOKE, 0, 180, 3)
-        self.balloon = Balloon(450, 300, 25, arcade.color.BURNT_ORANGE)
+        self.balloon = Balloon(450, 300, 0, 0, 25, arcade.color.BURNT_ORANGE)
 
     def on_draw(self):
         arcade.start_render()
@@ -255,6 +262,27 @@ class MyGame(arcade.Window):
 
         self.bird.draw()
         self.balloon.draw()
+
+    def update(self, delta_time):
+        self.balloon.update()
+
+    def on_key_press(self, key, modifiers):
+        """ Called whenever the user presses a key. """
+        if key == arcade.key.LEFT:
+            self.balloon.change_x = -MOVEMENT_SPEED
+        elif key == arcade.key.RIGHT:
+            self.balloon.change_x = MOVEMENT_SPEED
+        elif key == arcade.key.UP:
+            self.balloon.change_y = MOVEMENT_SPEED
+        elif key == arcade.key.DOWN:
+            self.balloon.change_y = -MOVEMENT_SPEED
+
+    def on_key_release(self, key, modifiers):
+        """ Called whenever a user releases a key. """
+        if key == arcade.key.LEFT or key == arcade.key.RIGHT:
+            self.balloon.change_x = 0
+        elif key == arcade.key.UP or key == arcade.key.DOWN:
+            self.balloon.change_y = 0
 
     def on_mouse_motion(self, x, y, dx, dy):
         """ Called to update our objects.
