@@ -1,14 +1,45 @@
 
 import random
 import arcade
+import math
 
 SPRITE_SCALING = 0.25
 STAR_COUNT = 25
-FIREBALL_COUNT = 25
+FIREBALL_COUNT = 5
 
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
 PLAYER_MOVEMENT_SPEED = 3
+SPRITE_SPEED = 0.5
+
+
+class Star(arcade.Sprite):
+
+    def reset_pos(self):
+        self.center_y = random.randrange(SCREEN_HEIGHT + 20,
+                                         SCREEN_HEIGHT + 100)
+        self.center_x = random.randrange(SCREEN_WIDTH)
+
+    def update(self):
+        self.center_y -= 1
+
+        if self.top < 0:
+            self.reset_pos()
+
+
+class Fireball(arcade.Sprite):
+
+    def follow_sprite(self, player_sprite):
+
+        if self.center_y < player_sprite.center_y:
+            self.center_y += min(SPRITE_SPEED, player_sprite.center_y - self.center_y)
+        elif self.center_y > player_sprite.center_y:
+            self.center_y -= min(SPRITE_SPEED, self.center_y - player_sprite.center_y)
+
+        if self.center_x < player_sprite.center_x:
+            self.center_x += min(SPRITE_SPEED, player_sprite.center_x - self.center_x)
+        elif self.center_x > player_sprite.center_x:
+            self.center_x -= min(SPRITE_SPEED, self.center_x - player_sprite.center_x)
 
 
 class Player(arcade.Sprite):
@@ -59,7 +90,7 @@ class MyGame(arcade.Window):
         for i in range(STAR_COUNT):
 
             # Star image from kenney.nl
-            star = arcade.Sprite("star.png", SPRITE_SCALING)
+            star = Star("star.png", SPRITE_SCALING)
 
             star.center_x = random.randrange(SCREEN_WIDTH)
             star.center_y = random.randrange(SCREEN_HEIGHT)
@@ -69,7 +100,7 @@ class MyGame(arcade.Window):
         for i in range(FIREBALL_COUNT):
 
             # Fireball image from kenney.nl
-            fireball = arcade.Sprite("fireball.png", SPRITE_SCALING)
+            fireball = Fireball("fireball.png", SPRITE_SCALING)
 
             fireball.center_x = random.randrange(SCREEN_WIDTH)
             fireball.center_y = random.randrange(SCREEN_HEIGHT)
@@ -85,11 +116,6 @@ class MyGame(arcade.Window):
 
         output = f"Score: {self.score}"
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
-
-    def update(self, delta_time):
-
-        # Move the player
-        self.player_list.update()
 
     def on_key_press(self, key, modifiers):
 
@@ -108,6 +134,10 @@ class MyGame(arcade.Window):
             self.player_sprite.change_y = 0
         elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
             self.player_sprite.change_x = 0
+
+    def update(self, delta_time):
+
+        self.player_list.update()
 
         self.star_list.update()
 
