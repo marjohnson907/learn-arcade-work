@@ -1,7 +1,6 @@
 
 import random
 import arcade
-import math
 
 SPRITE_SCALING = 0.25
 STAR_COUNT = 25
@@ -11,35 +10,6 @@ SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
 PLAYER_MOVEMENT_SPEED = 3
 SPRITE_SPEED = 0.5
-
-
-class Star(arcade.Sprite):
-
-    def reset_pos(self):
-        self.center_y = random.randrange(SCREEN_HEIGHT + 20,
-                                         SCREEN_HEIGHT + 100)
-        self.center_x = random.randrange(SCREEN_WIDTH)
-
-    def update(self):
-        self.center_y -= 1
-
-        if self.top < 0:
-            self.reset_pos()
-
-
-class Fireball(arcade.Sprite):
-
-    def follow_sprite(self, player_sprite):
-
-        if self.center_y < player_sprite.center_y:
-            self.center_y += min(SPRITE_SPEED, player_sprite.center_y - self.center_y)
-        elif self.center_y > player_sprite.center_y:
-            self.center_y -= min(SPRITE_SPEED, self.center_y - player_sprite.center_y)
-
-        if self.center_x < player_sprite.center_x:
-            self.center_x += min(SPRITE_SPEED, player_sprite.center_x - self.center_x)
-        elif self.center_x > player_sprite.center_x:
-            self.center_x -= min(SPRITE_SPEED, self.center_x - player_sprite.center_x)
 
 
 class Player(arcade.Sprite):
@@ -58,6 +28,35 @@ class Player(arcade.Sprite):
             self.bottom = 0
         elif self.top > SCREEN_HEIGHT - 1:
             self.top = SCREEN_HEIGHT - 1
+
+
+class Star(arcade.Sprite):
+
+    def reset_pos(self):
+        self.center_y = random.randrange(SCREEN_HEIGHT + 20,
+                                         SCREEN_HEIGHT + 100)
+        self.center_x = random.randrange(SCREEN_WIDTH)
+
+    def update(self):
+        self.center_y -= 1
+
+        if self.top < 0:
+            self.reset_pos()
+
+
+class Fireball(arcade.Sprite):
+
+    def follow_sprite(self, Player):
+
+        if self.center_y < Player.center_y:
+            self.center_y += min(SPRITE_SPEED, Player.center_y - self.center_y)
+        elif self.center_y > Player.center_y:
+            self.center_y -= min(SPRITE_SPEED, self.center_y - Player.center_y)
+
+        if self.center_x < Player.center_x:
+            self.center_x += min(SPRITE_SPEED, Player.center_x - self.center_x)
+        elif self.center_x > Player.center_x:
+            self.center_x -= min(SPRITE_SPEED, self.center_x - Player.center_x)
 
 
 class MyGame(arcade.Window):
@@ -149,6 +148,8 @@ class MyGame(arcade.Window):
             self.score += 1
 
         self.fireball_list.update()
+        for fireball in self.fireball_list:
+            fireball.follow_sprite(self.player_sprite)
 
         fireball_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
                                                               self.fireball_list)
