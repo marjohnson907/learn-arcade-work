@@ -3,7 +3,8 @@ import random
 import arcade
 
 SPRITE_SCALING = 0.25
-STAR_COUNT = 50
+STAR_COUNT = 25
+FIREBALL_COUNT = 25
 
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
@@ -35,11 +36,10 @@ class MyGame(arcade.Window):
 
         self.player_list = None
         self.star_list = None
+        self.fireball_list = None
 
         self.player_sprite = None
         self.score = 0
-
-        self.set_mouse_visible(False)
 
         arcade.set_background_color(arcade.color.EERIE_BLACK)
 
@@ -47,6 +47,7 @@ class MyGame(arcade.Window):
 
         self.player_list = arcade.SpriteList()
         self.star_list = arcade.SpriteList()
+        self.fireball_list = arcade.SpriteList()
 
         self.score = 0
 
@@ -57,7 +58,7 @@ class MyGame(arcade.Window):
 
         for i in range(STAR_COUNT):
 
-            # Blob image from kenney.nl
+            # Star image from kenney.nl
             star = arcade.Sprite("star.png", SPRITE_SCALING)
 
             star.center_x = random.randrange(SCREEN_WIDTH)
@@ -65,10 +66,21 @@ class MyGame(arcade.Window):
 
             self.star_list.append(star)
 
+        for i in range(FIREBALL_COUNT):
+
+            # Fireball image from kenney.nl
+            fireball = arcade.Sprite("fireball.png", SPRITE_SCALING)
+
+            fireball.center_x = random.randrange(SCREEN_WIDTH)
+            fireball.center_y = random.randrange(SCREEN_HEIGHT)
+
+            self.fireball_list.append(fireball)
+
     def on_draw(self):
         arcade.start_render()
 
         self.star_list.draw()
+        self.fireball_list.draw()
         self.player_list.draw()
 
         output = f"Score: {self.score}"
@@ -105,6 +117,15 @@ class MyGame(arcade.Window):
         for star in star_hit_list:
             star.remove_from_sprite_lists()
             self.score += 1
+
+        self.fireball_list.update()
+
+        fireball_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
+                                                              self.fireball_list)
+
+        for fireball in fireball_hit_list:
+            fireball.remove_from_sprite_lists()
+            self.score -= 1
 
 
 def main():
