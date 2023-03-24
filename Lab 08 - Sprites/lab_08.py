@@ -7,6 +7,25 @@ STAR_COUNT = 50
 
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
+PLAYER_MOVEMENT_SPEED = 3
+
+
+class Player(arcade.Sprite):
+
+    def update(self):
+        self.center_x += self.change_x
+        self.center_y += self.change_y
+
+        # Check for out-of-bounds
+        if self.left < 0:
+            self.left = 0
+        elif self.right > SCREEN_WIDTH - 1:
+            self.right = SCREEN_WIDTH - 1
+
+        if self.bottom < 0:
+            self.bottom = 0
+        elif self.top > SCREEN_HEIGHT - 1:
+            self.top = SCREEN_HEIGHT - 1
 
 
 class MyGame(arcade.Window):
@@ -31,7 +50,7 @@ class MyGame(arcade.Window):
 
         self.score = 0
 
-        self.player_sprite = arcade.Sprite("alienBlue_front.png", SPRITE_SCALING)
+        self.player_sprite = Player("alienBlue_front.png", SPRITE_SCALING)
         self.player_sprite.center_x = 350
         self.player_sprite.center_y = 350
         self.player_list.append(self.player_sprite)
@@ -55,13 +74,28 @@ class MyGame(arcade.Window):
         output = f"Score: {self.score}"
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
 
-    def on_mouse_motion(self, x, y, dx, dy):
-
-        # Move the center of the player sprite to match the mouse x, y
-        self.player_sprite.center_x = x
-        self.player_sprite.center_y = y
-
     def update(self, delta_time):
+
+        # Move the player
+        self.player_list.update()
+
+    def on_key_press(self, key, modifiers):
+
+        if key == arcade.key.UP:
+            self.player_sprite.change_y = PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.DOWN:
+            self.player_sprite.change_y = -PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.LEFT:
+            self.player_sprite.change_x = -PLAYER_MOVEMENT_SPEED
+        elif key == arcade.key.RIGHT:
+            self.player_sprite.change_x = PLAYER_MOVEMENT_SPEED
+
+    def on_key_release(self, key, modifiers):
+
+        if key == arcade.key.UP or key == arcade.key.DOWN:
+            self.player_sprite.change_y = 0
+        elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
+            self.player_sprite.change_x = 0
 
         self.star_list.update()
 
