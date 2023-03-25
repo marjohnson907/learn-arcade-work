@@ -15,10 +15,10 @@ SPRITE_SPEED = 0.5
 class Player(arcade.Sprite):
 
     def update(self):
+
         self.center_x += self.change_x
         self.center_y += self.change_y
 
-        # Check for out-of-bounds
         if self.left < 0:
             self.left = 0
         elif self.right > SCREEN_WIDTH - 1:
@@ -110,8 +110,8 @@ class MyGame(arcade.Window):
         arcade.start_render()
 
         self.star_list.draw()
-        self.fireball_list.draw()
         self.player_list.draw()
+        self.fireball_list.draw()
 
         output = f"Score: {self.score}"
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
@@ -147,7 +147,9 @@ class MyGame(arcade.Window):
             star.remove_from_sprite_lists()
             self.score += 1
 
-        self.fireball_list.update()
+        while len(self.star_list) == 0:
+            self.fireball_list.update()
+
         for fireball in self.fireball_list:
             fireball.follow_sprite(self.player_sprite)
 
@@ -157,6 +159,27 @@ class MyGame(arcade.Window):
         for fireball in fireball_hit_list:
             fireball.remove_from_sprite_lists()
             self.score -= 1
+
+        if len(self.star_list) > 0:
+            game_over = GameOver()
+
+
+class GameOver(arcade.View):
+    def __init__(self):
+        super().__init__()
+
+    def on_show_view(self):
+        arcade.set_background_color(arcade.color.EERIE_BLACK)
+
+    def on_draw(self):
+        self.clear()
+
+        arcade.draw_text("Game Over", 240, 400, arcade.color.WHITE, 54)
+        arcade.draw_text("Press Q to quit", 240, 400, arcade.color.WHITE, 54)
+
+    def on_key_press(self, symbol: int, modifiers: int):
+
+
 
 
 def main():
