@@ -59,10 +59,10 @@ class Fireball(arcade.Sprite):
             self.center_x -= min(SPRITE_SPEED, self.center_x - Player.center_x)
 
 
-class MyGame(arcade.Window):
+class GameView(arcade.View):
 
     def __init__(self):
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 8")
+        super().__init__()
 
         self.player_list = None
         self.star_list = None
@@ -147,11 +147,11 @@ class MyGame(arcade.Window):
             star.remove_from_sprite_lists()
             self.score += 1
 
-        while len(self.star_list) == 0:
-            self.fireball_list.update()
+        self.fireball_list.update()
 
         for fireball in self.fireball_list:
-            fireball.follow_sprite(self.player_sprite)
+            if len(self.star_list) != 0:
+                fireball.follow_sprite(self.player_sprite)
 
         fireball_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
                                                               self.fireball_list)
@@ -160,11 +160,12 @@ class MyGame(arcade.Window):
             fireball.remove_from_sprite_lists()
             self.score -= 1
 
-        if len(self.star_list) > 0:
-            game_over = GameOver()
+        if len(self.star_list) == 0:
+            view = GameOverView()
+            self.window.show_view(view)
 
 
-class GameOver(arcade.View):
+class GameOverView(arcade.View):
     def __init__(self):
         super().__init__()
 
@@ -173,18 +174,15 @@ class GameOver(arcade.View):
 
     def on_draw(self):
         self.clear()
-
-        arcade.draw_text("Game Over", 240, 400, arcade.color.WHITE, 54)
-        arcade.draw_text("Press Q to quit", 240, 400, arcade.color.WHITE, 54)
-
-    def on_key_press(self, symbol: int, modifiers: int):
-
-
+        arcade.draw_text("Game Over", 225, 300, arcade.color.WHITE, 20)
 
 
 def main():
-    window = MyGame()
-    window.setup()
+    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 8")
+    window.score = 0
+    start_view = GameView()
+    window.show_view(start_view)
+    start_view.setup()
     arcade.run()
 
 
