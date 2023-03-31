@@ -1,14 +1,13 @@
 import random
 import arcade
-import pyglet.math
-import Vec2
+from pyglet.math import Vec2
 
-SPRITE_SCALING = 1
-SCREEN_WIDTH = 900
-SCREEN_HEIGHT = 550
-MARGIN = 100
-CAMERA_SPEED = 0.1
-PLAYER_MOVEMENT_SPEED = 1
+SPRITE_SCALING = 0.5
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+MARGIN = 25
+CAMERA_SPEED = 1
+MOVEMENT_SPEED = 5
 
 
 class MyGame(arcade.Window):
@@ -36,27 +35,178 @@ class MyGame(arcade.Window):
         # Game play
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+        self.score = 0
 
         # Image from https://kenney.nl
-        self.player_sprite = arcade.Sprite("../Lab 09 - Sprites and Walls/player_01.png",
-                                           scale=0.5)
-        self.player_sprite.center_x = 450
-        self.player_sprite.center_y = 250
+        self.player_sprite = arcade.Sprite("player_01.png", SPRITE_SCALING)
+        self.player_sprite.center_x = 50
+        self.player_sprite.center_y = 75
         self.player_list.append(self.player_sprite)
-
-        for x in range(200, 1650, 210):
-            for y in range(0, 1600, 64):
-                # Image from https://kenney.nl
-                if random.randrange(5) > 0:
-                    wall = arcade.Sprite("../Lab 09 - Sprites and Walls/crate_01.png", SPRITE_SCALING)
-                    wall.center_x = x
-                    wall.center_y = y
-                    self.wall_list.append(wall)
 
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
+        # Image from https://kenney.nl
+        for x in range(100, 1000, 32):
+            wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 100
+            self.wall_list.append(wall)
+
+        for x in range(100, 1000, 32):
+            wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 300
+            self.wall_list.append(wall)
+
+        for x in range(100, 1000, 32):
+            wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 500
+            self.wall_list.append(wall)
+
+        for x in range(100, 1000, 32):
+            wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 700
+            self.wall_list.append(wall)
+
+        for x in range(100, 1000, 32):
+            wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 900
+            self.wall_list.append(wall)
+
+        for x in range(100, 1000, 32):
+            wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 1100
+            self.wall_list.append(wall)
+
+        # Image from https://kenney.nl
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 300
+        wall.center_y = 200
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 600
+        wall.center_y = 200
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 800
+        wall.center_y = 200
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 200
+        wall.center_y = 400
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 300
+        wall.center_y = 400
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 500
+        wall.center_y = 400
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 700
+        wall.center_y = 400
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 800
+        wall.center_y = 400
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 200
+        wall.center_y = 550
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 200
+        wall.center_y = 650
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 400
+        wall.center_y = 600
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 600
+        wall.center_y = 550
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 600
+        wall.center_y = 650
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 950
+        wall.center_y = 550
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 950
+        wall.center_y = 650
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 800
+        wall.center_y = 600
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 500
+        wall.center_y = 800
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 450
+        wall.center_y = 750
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 550
+        wall.center_y = 750
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 800
+        wall.center_y = 850
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 900
+        wall.center_y = 850
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 850
+        wall.center_y = 800
+        self.wall_list.append(wall)
+
+        for x in range(150, 1000, 200):
+            wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 950
+            self.wall_list.append(wall)
+
+        for x in range(200, 900, 200):
+            wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 1050
+            self.wall_list.append(wall)
+
         # Set the background color
-        arcade.set_background_color(arcade.color.DARK_MIDNIGHT_BLUE)
+        arcade.set_background_color(arcade.color.BLACK)
 
     def on_draw(self):
         # Render
@@ -69,15 +219,7 @@ class MyGame(arcade.Window):
 
         self.camera_gui.use()
 
-        # GUI
-        arcade.draw_rectangle_filled(self.width // 2,
-                                     20,
-                                     self.width,
-                                     40,
-                                     arcade.color.ORANGE)
-        text = f"Scroll value: ({self.camera_sprites.position[0]:5.1f}, " \
-               f"{self.camera_sprites.position[1]:5.1f})"
-        arcade.draw_text(text, 10, 10, arcade.color.RED, 20)
+        arcade.draw_text(f"Score: {self.score}", 10, 10, arcade.color.WHITE, 24)
 
     def on_key_press(self, key, modifiers):
 
@@ -107,13 +249,13 @@ class MyGame(arcade.Window):
         self.player_sprite.change_y = 0
 
         if self.up_pressed and not self.down_pressed:
-            self.player_sprite.change_y = PLAYER_MOVEMENT_SPEED
+            self.player_sprite.change_y = MOVEMENT_SPEED
         elif self.down_pressed and not self.up_pressed:
-            self.player_sprite.change_y = -PLAYER_MOVEMENT_SPEED
+            self.player_sprite.change_y = -MOVEMENT_SPEED
         if self.left_pressed and not self.right_pressed:
-            self.player_sprite.change_x = -PLAYER_MOVEMENT_SPEED
+            self.player_sprite.change_x = -MOVEMENT_SPEED
         elif self.right_pressed and not self.left_pressed:
-            self.player_sprite.change_x = PLAYER_MOVEMENT_SPEED
+            self.player_sprite.change_x = MOVEMENT_SPEED
 
         self.physics_engine.update()
 
