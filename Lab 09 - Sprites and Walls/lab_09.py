@@ -1,4 +1,6 @@
+import random
 import arcade
+from pyglet.math import Vec2
 
 SPRITE_SCALING_BOX = 0.5
 SPRITE_SCALING_PLAYER = 0.5
@@ -22,6 +24,11 @@ class MyGame(arcade.Window):
         self.player_sprite = None
 
         self.physics_engine = None
+
+        self.left_pressed = False
+        self.right_pressed = False
+        self.up_pressed = False
+        self.down_pressed = False
 
         self.camera_for_sprites = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.camera_for_gui = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
@@ -190,7 +197,20 @@ class MyGame(arcade.Window):
         wall.center_y = 800
         self.wall_list.append(wall)
 
+        for x in range(150, 1000, 200):
+            wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING_BOX)
+            wall.center_x = x
+            wall.center_y = 950
+            self.wall_list.append(wall)
+
+        for x in range(200, 900, 200):
+            wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING_BOX)
+            wall.center_x = x
+            wall.center_y = 1050
+            self.wall_list.append(wall)
+
     def on_draw(self):
+
         arcade.start_render()
 
         self.camera_for_sprites.use()
@@ -199,34 +219,63 @@ class MyGame(arcade.Window):
         self.player_list.draw()
 
         self.camera_for_gui.use()
+
         arcade.draw_text(f"Score: {self.score}", 10, 10, arcade.color.WHITE, 24)
+
+    def on_key_press(self, key, modifiers):
+
+        if key == arcade.key.UP:
+            self.up_pressed = True
+        elif key == arcade.key.DOWN:
+            self.down_pressed = True
+        elif key == arcade.key.LEFT:
+            self.left_pressed = True
+        elif key == arcade.key.RIGHT:
+            self.right_pressed = True
+
+    def on_key_release(self, key, modifiers):
+
+        if key == arcade.key.UP:
+            self.up_pressed = False
+        elif key == arcade.key.DOWN:
+            self.down_pressed = False
+        elif key == arcade.key.LEFT:
+            self.left_pressed = False
+        elif key == arcade.key.RIGHT:
+            self.right_pressed = False
 
     def on_update(self, delta_time):
         """ Movement and game logic """
+        self.player_sprite.change_x = 0
+        self.player_sprite.change_y = 0
+
+        if self.up_pressed and not self.down_pressed:
+            self.player_sprite.change_y = MOVEMENT_SPEED
+        elif self.down_pressed and not self.up_pressed:
+            self.player_sprite.change_y = -MOVEMENT_SPEED
+        if self.left_pressed and not self.right_pressed:
+            self.player_sprite.change_x = -MOVEMENT_SPEED
+        elif self.right_pressed and not self.left_pressed:
+            self.player_sprite.change_x = MOVEMENT_SPEED
 
         self.physics_engine.update()
+
+        self.scroll_to_player()
 
         lower_left_corner = (self.player_sprite.center_x - self.width / 2,
                              self.player_sprite.center_y - self.height / 2)
         self.camera_for_sprites.move_to(lower_left_corner, CAMERA_SPEED)
 
-    def on_key_press(self, key, modifiers):
+    def scroll_to_player(self):
 
-        if key == arcade.key.UP:
-            self.player_sprite.change_y = MOVEMENT_SPEED
-        elif key == arcade.key.DOWN:
-            self.player_sprite.change_y = -MOVEMENT_SPEED
-        elif key == arcade.key.LEFT:
-            self.player_sprite.change_x = -MOVEMENT_SPEED
-        elif key == arcade.key.RIGHT:
-            self.player_sprite.change_x = MOVEMENT_SPEED
+        position = Vec2(self.player_sprite.center_x - self.width / 2,
+                        self.player_sprite.center_y - self.height / 2)
+        self.camera_for_sprites.move_to(position, CAMERA_SPEED)
 
-    def on_key_release(self, key, modifiers):
+    def on_resize(self, width, height):
 
-        if key == arcade.key.UP or key == arcade.key.DOWN:
-            self.player_sprite.change_y = 0
-        elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
-            self.player_sprite.change_x = 0
+        self.camera_for_sprites.resize(int(width), int(height))
+        self.camera_for_gui.resize(int(width), int(height))
 
 
 def main():
