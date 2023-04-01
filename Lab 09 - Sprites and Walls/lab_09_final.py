@@ -61,40 +61,196 @@ class MyGame(arcade.Window):
         wall.center_y = 200
         self.wall_list.append(wall)
 
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 150
+        wall.center_y = 450
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 250
+        wall.center_y = 450
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 200
+        wall.center_y = 400
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 550
+        wall.center_y = 350
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 450
+        wall.center_y = 350
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 500
+        wall.center_y = 400
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 800
+        wall.center_y = 450
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 900
+        wall.center_y = 450
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 850
+        wall.center_y = 400
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 150
+        wall.center_y = 650
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 200
+        wall.center_y = 600
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 400
+        wall.center_y = 550
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 450
+        wall.center_y = 600
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 650
+        wall.center_y = 650
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 700
+        wall.center_y = 600
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 900
+        wall.center_y = 550
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 950
+        wall.center_y = 600
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 150
+        wall.center_y = 750
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 250
+        wall.center_y = 750
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 200
+        wall.center_y = 800
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 550
+        wall.center_y = 850
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 450
+        wall.center_y = 850
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 500
+        wall.center_y = 800
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 800
+        wall.center_y = 450
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 900
+        wall.center_y = 450
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 850
+        wall.center_y = 400
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 800
+        wall.center_y = 750
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 700
+        wall.center_y = 750
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 750
+        wall.center_y = 800
+        self.wall_list.append(wall)
+
+        wall = arcade.Sprite("tileYellow_02.png", SPRITE_SCALING)
+        wall.center_x = 950
+        wall.center_y = 850
+        self.wall_list.append(wall)
+
         # Image from https://kenney.nl
-        for x in range(100, 1000, 32):
+        for x in range(100, 1100, 32):
             wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
             wall.center_x = x
             wall.center_y = 100
             self.wall_list.append(wall)
 
-        for x in range(100, 1000, 32):
+        for x in range(10, 1000, 32):
             wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
             wall.center_x = x
             wall.center_y = 300
             self.wall_list.append(wall)
 
-        for x in range(100, 1000, 32):
+        for x in range(100, 1100, 32):
             wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
             wall.center_x = x
             wall.center_y = 500
             self.wall_list.append(wall)
 
-        for x in range(100, 1000, 32):
+        for x in range(10, 1000, 32):
             wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
             wall.center_x = x
             wall.center_y = 700
             self.wall_list.append(wall)
 
-        for x in range(100, 1000, 32):
+        for x in range(100, 1120, 32):
             wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
             wall.center_x = x
             wall.center_y = 900
             self.wall_list.append(wall)
 
-        for y in range(100, 1000, 32):
+        for y in range(100, 900, 32):
             wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
-            wall.center_x = 0
+            wall.center_x = 10
+            wall.center_y = y
+            self.wall_list.append(wall)
+
+        for y in range(100, 900, 32):
+            wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
+            wall.center_x = 1100
             wall.center_y = y
             self.wall_list.append(wall)
 
