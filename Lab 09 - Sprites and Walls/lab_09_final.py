@@ -25,6 +25,9 @@ class MyGame(arcade.Window):
         # Player
         self.player_sprite = None
 
+        # Sound
+        self.laser_sound = arcade.load_sound("laser.wav")
+
         # Physics engine
         self.physics_engine = None
 
@@ -267,8 +270,8 @@ class MyGame(arcade.Window):
 
             while not coin_placed_successfully:
                 # Position the coin
-                coin.center_x = random.randrange(SCREEN_WIDTH)
-                coin.center_y = random.randrange(SCREEN_HEIGHT)
+                coin.center_x = random.randrange(100, 1000)
+                coin.center_y = random.randrange(100, 900)
 
                 # See if the coin is hitting a wall
                 wall_hit_list = arcade.check_for_collision_with_list(coin, self.wall_list)
@@ -311,6 +314,7 @@ class MyGame(arcade.Window):
 
         # Loop through each colliding sprite, remove it, and add to the score.
         for coin in coins_hit_list:
+            arcade.play_sound(self.laser_sound)
             coin.remove_from_sprite_lists()
             self.score += 1
 
