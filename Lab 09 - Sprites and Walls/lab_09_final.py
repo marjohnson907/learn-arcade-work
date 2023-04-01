@@ -305,6 +305,15 @@ class MyGame(arcade.Window):
         # Update sprites
         self.physics_engine.update()
 
+        # Generate a list of all sprites that collided with the player.
+        coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
+                                                              self.coin_list)
+
+        # Loop through each colliding sprite, remove it, and add to the score.
+        for coin in coins_hit_list:
+            coin.remove_from_sprite_lists()
+            self.score += 1
+
         # Scroll the window to the player.
         lower_left_corner = (self.player_sprite.center_x - self.width / 2,
                              self.player_sprite.center_y - self.height / 2)
