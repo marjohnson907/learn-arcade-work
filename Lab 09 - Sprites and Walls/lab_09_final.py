@@ -6,6 +6,7 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 500
 
 MOVEMENT_SPEED = 5
+CAMERA_SPEED = 1
 
 
 class MyGame(arcade.Window):
@@ -23,6 +24,10 @@ class MyGame(arcade.Window):
 
         # Physics engine
         self.physics_engine = None
+
+        # Cameras
+        self.camera_for_sprites = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
+        self.camera_for_gui = arcade.Camera(SCREEN_WIDTH, SCREEN_HEIGHT)
 
     def setup(self):
         arcade.set_background_color(arcade.color.BLACK)
@@ -69,13 +74,55 @@ class MyGame(arcade.Window):
             wall.center_y = 300
             self.wall_list.append(wall)
 
+        for x in range(100, 1000, 32):
+            wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 500
+            self.wall_list.append(wall)
+
+        for x in range(100, 1000, 32):
+            wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 700
+            self.wall_list.append(wall)
+
+        for x in range(100, 1000, 32):
+            wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
+            wall.center_x = x
+            wall.center_y = 900
+            self.wall_list.append(wall)
+
+        for y in range(100, 1000, 32):
+            wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
+            wall.center_x = 0
+            wall.center_y = y
+            self.wall_list.append(wall)
+
         # Physics engine
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
     def on_draw(self):
         arcade.start_render()
+        # Scrolling camera for sprites
+        self.camera_for_sprites.use()
+
         self.wall_list.draw()
         self.player_list.draw()
+
+        # GUI camera
+        self.camera_for_gui.use()
+        arcade.draw_text(f"Score: {self.score}", 10, 10, arcade.color.WHITE, 24)
+
+    def on_update(self, delta_time):
+        """ Movement and game logic """
+
+        # Update sprites
+        self.physics_engine.update()
+
+        # Scroll the window to the player.
+        lower_left_corner = (self.player_sprite.center_x - self.width / 2,
+                             self.player_sprite.center_y - self.height / 2)
+        self.camera_for_sprites.move_to(lower_left_corner, CAMERA_SPEED)
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
