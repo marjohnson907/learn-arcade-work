@@ -1,10 +1,12 @@
 import arcade
+import random
 
 SPRITE_SCALING = 0.5
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 500
 
+NUMBER_OF_COINS = 50
 MOVEMENT_SPEED = 5
 CAMERA_SPEED = 1
 
@@ -18,6 +20,7 @@ class MyGame(arcade.Window):
         # Lists
         self.player_list = None
         self.wall_list = None
+        self.coin_list = None
 
         # Player
         self.player_sprite = None
@@ -35,6 +38,7 @@ class MyGame(arcade.Window):
         # Sprite lists
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+        self.coin_list = arcade.SpriteList()
 
         # Reset the score
         self.score = 0
@@ -211,7 +215,7 @@ class MyGame(arcade.Window):
         wall.center_y = 850
         self.wall_list.append(wall)
 
-        # Image from https://kenney.nl
+        # Other walls, image from https://kenney.nl
         for x in range(100, 1100, 32):
             wall = arcade.Sprite("crate_01.png", SPRITE_SCALING)
             wall.center_x = x
@@ -254,6 +258,31 @@ class MyGame(arcade.Window):
             wall.center_y = y
             self.wall_list.append(wall)
 
+        # Coins, image from https://kenney.nl
+        for i in range(NUMBER_OF_COINS):
+            coin = arcade.Sprite("environment_11.png", SPRITE_SCALING)
+
+            # Boolean variable coin placement
+            coin_placed_successfully = False
+
+            while not coin_placed_successfully:
+                # Position the coin
+                coin.center_x = random.randrange(SCREEN_WIDTH)
+                coin.center_y = random.randrange(SCREEN_HEIGHT)
+
+                # See if the coin is hitting a wall
+                wall_hit_list = arcade.check_for_collision_with_list(coin, self.wall_list)
+
+                # See if the coin is hitting another coin
+                coin_hit_list = arcade.check_for_collision_with_list(coin, self.coin_list)
+
+                if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
+                    # It is!
+                    coin_placed_successfully = True
+
+                # Add the coin to the lists
+            self.coin_list.append(coin)
+
         # Physics engine
         self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.wall_list)
 
@@ -263,6 +292,7 @@ class MyGame(arcade.Window):
         self.camera_for_sprites.use()
 
         self.wall_list.draw()
+        self.coin_list.draw()
         self.player_list.draw()
 
         # GUI camera
