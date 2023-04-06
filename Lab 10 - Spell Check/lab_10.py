@@ -36,17 +36,16 @@ def main():
 
     for line in alice_wonderland:
         line = line.strip()
-        word_list = split_line(line)
+        word_list = split_line(line.upper())
 
         for word in word_list:
-            word = split_line(word.upper())
 
             current_list_position = 0
 
-            while current_list_position < 200:
+            while current_list_position < len(dictionary) and word != dictionary[current_list_position]:
                 current_list_position += 1
-                if word != dictionary:
-                    print("possible misspelled word: ", word)
+            if current_list_position >= len(dictionary):
+                print("possible misspelled word: ", word)
 
     alice_wonderland.close()
 
