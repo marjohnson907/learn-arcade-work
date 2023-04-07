@@ -38,12 +38,12 @@ def main():
 
     for line in alice_wonderland:
         line = line.strip()
-
+        # Add line numbers
         if line != "\n":
             line_number += 1
 
         word_list = split_line(line.upper())
-
+        # Apply spell check
         for word in word_list:
 
             current_list_position = 0
