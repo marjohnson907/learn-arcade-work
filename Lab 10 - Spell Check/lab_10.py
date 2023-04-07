@@ -34,8 +34,14 @@ def main():
 
     print("---Linear Search---")
 
+    line_number = 0
+
     for line in alice_wonderland:
         line = line.strip()
+
+        if line != "\n":
+            line_number += 1
+
         word_list = split_line(line.upper())
 
         for word in word_list:
@@ -44,8 +50,10 @@ def main():
 
             while current_list_position < len(dictionary) and word != dictionary[current_list_position]:
                 current_list_position += 1
+
             if current_list_position >= len(dictionary):
-                print("possible misspelled word: ", word)
+
+                print("Line ", line_number, " possible misspelled word: ", word)
 
     alice_wonderland.close()
 
