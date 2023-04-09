@@ -11,6 +11,26 @@ MOVEMENT_SPEED = 5
 CAMERA_SPEED = 1
 
 
+class Room:
+    """Information about different rooms."""
+    def __init__(self):
+        self.wall_list = None
+
+        # Background images
+        self.background = None
+
+
+def setup_room_1():
+    """First Room"""
+    room = Room()
+
+    # Sprite Lists
+    room.wall_list = arcade.SpriteList()
+
+    # Walls
+
+
+
 class MyGame(arcade.Window):
 
     def __init__(self):
@@ -25,7 +45,7 @@ class MyGame(arcade.Window):
         # Player
         self.player_sprite = None
 
-        # Sound
+        # Sound from https://learn.arcade.academy.html
         self.laser_sound = arcade.load_sound("laser.wav")
 
         # Physics engine
