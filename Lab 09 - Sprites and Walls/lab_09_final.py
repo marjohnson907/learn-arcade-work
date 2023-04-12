@@ -2,37 +2,14 @@ import arcade
 import random
 
 SPRITE_SCALING = 0.5
-
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 500
-
 NUMBER_OF_COINS = 50
 MOVEMENT_SPEED = 5
 CAMERA_SPEED = 1
 
 
-class Room:
-    """Information about different rooms."""
-    def __init__(self):
-        self.wall_list = None
-
-        # Background images
-        self.background = None
-
-
-def setup_room_1():
-    """First Room"""
-    room = Room()
-
-    # Sprite Lists
-    room.wall_list = arcade.SpriteList()
-
-    # Walls
-
-
-
 class MyGame(arcade.Window):
-
     def __init__(self):
         """ Initializer """
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT)
@@ -45,7 +22,7 @@ class MyGame(arcade.Window):
         # Player
         self.player_sprite = None
 
-        # Sound from https://learn.arcade.academy.html
+        # Sound
         self.laser_sound = arcade.load_sound("laser.wav")
 
         # Physics engine
@@ -290,19 +267,18 @@ class MyGame(arcade.Window):
 
             while not coin_placed_successfully:
                 # Position the coin
+                coin.center_x = random.randrange(SCREEN_WIDTH)
+                coin.center_y = random.randrange(SCREEN_HEIGHT)
                 coin.center_x = random.randrange(100, 1000)
                 coin.center_y = random.randrange(100, 900)
 
                 # See if the coin is hitting a wall
                 wall_hit_list = arcade.check_for_collision_with_list(coin, self.wall_list)
-
                 # See if the coin is hitting another coin
                 coin_hit_list = arcade.check_for_collision_with_list(coin, self.coin_list)
-
                 if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
                     # It is!
                     coin_placed_successfully = True
-
                 # Add the coin to the lists
             self.coin_list.append(coin)
 
@@ -311,9 +287,9 @@ class MyGame(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
+
         # Scrolling camera for sprites
         self.camera_for_sprites.use()
-
         self.wall_list.draw()
         self.coin_list.draw()
         self.player_list.draw()
@@ -324,10 +300,8 @@ class MyGame(arcade.Window):
 
     def on_update(self, delta_time):
         """ Movement and game logic """
-
         # Update sprites
         self.physics_engine.update()
-
         # Generate a list of all sprites that collided with the player.
         coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
                                                               self.coin_list)
@@ -345,7 +319,6 @@ class MyGame(arcade.Window):
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
-
         if key == arcade.key.UP:
             self.player_sprite.change_y = MOVEMENT_SPEED
         elif key == arcade.key.DOWN:
@@ -357,7 +330,6 @@ class MyGame(arcade.Window):
 
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
-
         if key == arcade.key.UP or key == arcade.key.DOWN:
             self.player_sprite.change_y = 0
         elif key == arcade.key.LEFT or key == arcade.key.RIGHT:
