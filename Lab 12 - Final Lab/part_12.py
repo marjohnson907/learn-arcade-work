@@ -1,9 +1,10 @@
 import arcade
+import random
 
 SPRITE_SCALING = 0.5
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 600
-NUMBER_OF_COINS = 5
+NUMBER_OF_COINS = 10
 MOVEMENT_SPEED = 5
 
 
@@ -12,6 +13,7 @@ class Room:
     def __init__(self):
         # Lists
         self.wall_list = None
+        self.coin_list = None
 
 
 def setup_room_1():
@@ -20,6 +22,7 @@ def setup_room_1():
 
     # Sprite lists
     room.wall_list = arcade.SpriteList()
+    room.coin_list = arcade.SpriteList()
 
     # Walls, Room 1, image from https://kenney.nl
     for y in (0, SCREEN_HEIGHT - 16):
@@ -52,6 +55,28 @@ def setup_room_1():
         wall.center_x = SCREEN_WIDTH
         wall.center_y = y
         room.wall_list.append(wall)
+
+        # Coins, image from https://kenney.nl
+        for i in range(NUMBER_OF_COINS):
+            coin = arcade.Sprite("coinGold.png", SPRITE_SCALING/2)
+
+            # Boolean variable coin placement
+            coin_placed_successfully = False
+
+            while not coin_placed_successfully:
+                # Position the coin
+                coin.center_x = random.randrange(SCREEN_WIDTH - 25)
+                coin.center_y = random.randrange(SCREEN_HEIGHT - 25)
+
+                # See if the coin is hitting a wall
+                wall_hit_list = arcade.check_for_collision_with_list(coin, room.wall_list)
+                # See if the coin is hitting another coin
+                coin_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list)
+                if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
+                    # It is!
+                    coin_placed_successfully = True
+            # Add the coin to the lists
+            room.coin_list.append(coin)
 
     return room
 
@@ -248,7 +273,10 @@ class MyGame(arcade.Window):
         # Set up the player
         self.rooms = None
         self.player_sprite = None
+        # Sound
+        self.laser_sound = arcade.load_sound("laser.wav")
         self.player_list = None
+        self.coin_list = None
         self.physics_engine = None
 
     def setup(self):
@@ -295,8 +323,8 @@ class MyGame(arcade.Window):
         # Draw walls
         self.rooms[self.current_room].wall_list.draw()
 
-        # If you have coins or monsters, then copy and modify the line
-        # above for each list.
+        # Draw coins
+        self.rooms[self.current_room].coin_list.draw()
 
         self.player_list.draw()
         arcade.draw_text(f"Score: {self.score}", 10, 10, arcade.color.WHITE, 24)
@@ -322,6 +350,18 @@ class MyGame(arcade.Window):
     def on_update(self, delta_time):
         """ Movement and game logic """
         self.physics_engine.update()
+
+        # self.coin_list.update()
+
+        # Generate a list of all sprites that collided with the player.
+        coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
+                                                              self.rooms[self.current_room].coin_list)
+
+        # Loop through each colliding sprite, remove it, and add to the score.
+        for coin in coins_hit_list:
+            arcade.play_sound(self.laser_sound)
+            coin.remove_from_sprite_lists()
+            self.score += 1
 
         # Room logic
         if self.player_sprite.center_x > SCREEN_WIDTH and self.current_room == 0:
