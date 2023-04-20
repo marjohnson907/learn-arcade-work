@@ -67,6 +67,30 @@ def setup_room_1():
         wall.center_y = y
         room.wall_list.append(wall)
 
+    for y in range(100, 200, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(400, 600, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(200, 500, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 200
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(300, 500, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 300
+        wall.center_y = y
+        room.wall_list.append(wall)
+
     for y in range(0, 300, 32):
         wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
         wall.center_x = SCREEN_WIDTH
@@ -100,6 +124,28 @@ def setup_room_1():
                 coin_placed_successfully = True
         # Add the coin to the lists
         room.coin_list.append(coin)
+
+    # Zombie, image from https://kenney.nl
+    for i in range(ENEMY_NUMBER):
+        enemy = Enemy("character_zombie_hit.png", SPRITE_SCALING)
+
+        # Boolean variable placement
+        enemy_placed_successfully = False
+
+        while not enemy_placed_successfully:
+            # Position the zombie
+            enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
+            enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
+
+            # See if the zombie is hitting a wall
+            wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
+            # See if the zombie is hitting another star or coin
+            enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list)
+            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
+                # It is!
+                enemy_placed_successfully = True
+        # Add the zombie to the lists
+        room.enemy_list.append(enemy)
 
     return room
 
@@ -190,6 +236,28 @@ def setup_room_2():
             # Add the star to the lists
             room.star_list.append(star)
 
+    # Alien, image from https://kenney.nl
+    for i in range(ENEMY_NUMBER):
+        enemy = Enemy("alienBlue_front.png", SPRITE_SCALING)
+
+        # Boolean variable placement
+        enemy_placed_successfully = False
+
+        while not enemy_placed_successfully:
+            # Position the alien
+            enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
+            enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
+
+            # See if the alien is hitting a wall
+            wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
+            # See if the alien is hitting another star or coin
+            enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
+            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
+                # It is!
+                enemy_placed_successfully = True
+        # Add the alien to the lists
+        room.enemy_list.append(enemy)
+
     return room
 
 
@@ -279,27 +347,27 @@ def setup_room_3():
         # Add the star to the lists
         room.star_list.append(star)
 
-        # Bee, image from https://kenney.nl
-        for i in range(ENEMY_NUMBER):
-            enemy = Enemy("bee.png", SPRITE_SCALING/2)
+    # Bee, image from https://kenney.nl
+    for i in range(ENEMY_NUMBER):
+        enemy = Enemy("bee.png", SPRITE_SCALING)
 
-            # Boolean variable placement
-            enemy_placed_successfully = False
+        # Boolean variable placement
+        enemy_placed_successfully = False
 
-            while not enemy_placed_successfully:
-                # Position the bee
-                enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
-                enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
+        while not enemy_placed_successfully:
+            # Position the bee
+            enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
+            enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
 
-                # See if the bee is hitting a wall
-                wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
-                # See if the bee is hitting another star or coin
-                enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
-                if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
-                    # It is!
-                    enemy_placed_successfully = True
-            # Add the bee to the lists
-            room.enemy_list.append(enemy)
+            # See if the bee is hitting a wall
+            wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
+            # See if the bee is hitting another star or coin
+            enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
+            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
+                # It is!
+                enemy_placed_successfully = True
+        # Add the bee to the lists
+        room.enemy_list.append(enemy)
 
     return room
 
@@ -395,27 +463,27 @@ def setup_room_4():
         # Add the puffer fish to the lists
         room.star_list.append(star)
 
-        # Enemy fish, image from https://kenney.nl
-        for i in range(ENEMY_NUMBER):
-            enemy = Enemy("fishTile_090.png", SPRITE_SCALING)
+    # Enemy fish, image from https://kenney.nl
+    for i in range(ENEMY_NUMBER):
+        enemy = Enemy("fishTile_090.png", SPRITE_SCALING * 2)
 
-            # Boolean variable placement
-            enemy_placed_successfully = False
+        # Boolean variable placement
+        enemy_placed_successfully = False
 
-            while not enemy_placed_successfully:
-                # Position the enemy fish
-                enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
-                enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
+        while not enemy_placed_successfully:
+            # Position the enemy fish
+            enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
+            enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
 
-                # See if the enemy fish is hitting a wall
-                wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
-                # See if the enemy fish is hitting another star or coin
-                enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
-                if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
-                    # It is!
-                    enemy_placed_successfully = True
-            # Add the enemy fish to the lists
-            room.enemy_list.append(enemy)
+            # See if the enemy fish is hitting a wall
+            wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
+            # See if the enemy fish is hitting another star or coin
+            enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
+            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
+                # It is!
+                enemy_placed_successfully = True
+        # Add the enemy fish to the lists
+        room.enemy_list.append(enemy)
 
     return room
 
@@ -514,7 +582,7 @@ def setup_room_5():
 
     # Bomb, image from https://kenney.nl
     for i in range(ENEMY_NUMBER):
-        enemy = Enemy("bomb.png", SPRITE_SCALING/2)
+        enemy = Enemy("bomb.png", SPRITE_SCALING)
 
         # Boolean variable bomb placement
         enemy_placed_successfully = False
@@ -537,14 +605,14 @@ def setup_room_5():
     return room
 
 
-class MyGame(arcade.Window):
+class GameView(arcade.View):
     """ Main application class. """
 
-    def __init__(self, width, height):
+    def __init__(self):
         """
         Initializer
         """
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT)
+        super().__init__()
 
         # Sprite lists
         self.current_room = 0
@@ -708,11 +776,19 @@ class MyGame(arcade.Window):
             self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite,
                                                              self.rooms[self.current_room].wall_list)
             self.player_sprite.center_x = 0
-        elif self.player_sprite.center_x < 0 and self.current_room == 3:
+        if self.player_sprite.center_x < 0 and self.current_room == 3:
             self.current_room = 3
             self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite,
                                                              self.rooms[self.current_room].wall_list)
             self.player_sprite.center_x = SCREEN_WIDTH
+        if self.player_sprite.center_x < 0 and self.current_room == 4:
+            self.current_room = 4
+            self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite,
+                                                             self.rooms[self.current_room].wall_list)
+            self.player_sprite.center_x = SCREEN_WIDTH
+        elif self.player_sprite.center_x > SCREEN_WIDTH and self.current_room == 4:
+            view = GameOverView()
+            self.window.show_view(view)
 
 
 class GameOverView(arcade.View):
@@ -724,14 +800,15 @@ class GameOverView(arcade.View):
 
     def on_draw(self):
         self.clear()
-        arcade.draw_text("Game Over", SCREEN_WIDTH/2, SCREEN_HEIGHT/2, arcade.color.DARK_SIENNA, 100)
-        arcade.draw_text(self.score, 550, 200, arcade.color.DARK_SIENNA, 20)
+        arcade.draw_text("Game Over", 250, SCREEN_HEIGHT/2, arcade.color.DARK_SIENNA, 100)
 
 
 def main():
     """ Main function """
-    window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT)
-    window.setup()
+    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT)
+    start_view = GameView()
+    window.show_view(start_view)
+    start_view.setup()
     arcade.run()
 
 
