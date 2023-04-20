@@ -20,6 +20,7 @@ class Room:
         self.coin_list = None
         self.star_list = None
         self.enemy_list = None
+        self.explosive_list = None
 
 
 class Enemy(arcade.Sprite):
@@ -78,27 +79,27 @@ def setup_room_1():
         wall.center_y = y
         room.wall_list.append(wall)
 
-        # Coins, image from https://kenney.nl
-        for i in range(NUMBER_OF_COINS):
-            coin = arcade.Sprite("coinGold.png", SPRITE_SCALING/2)
+    # Coins, image from https://kenney.nl
+    for i in range(NUMBER_OF_COINS):
+        coin = arcade.Sprite("coinGold.png", SPRITE_SCALING/2)
 
-            # Boolean variable coin placement
-            coin_placed_successfully = False
+        # Boolean variable coin placement
+        coin_placed_successfully = False
 
-            while not coin_placed_successfully:
-                # Position the coin
-                coin.center_x = random.randrange(SCREEN_WIDTH - 25)
-                coin.center_y = random.randrange(SCREEN_HEIGHT - 25)
+        while not coin_placed_successfully:
+            # Position the coin
+            coin.center_x = random.randrange(SCREEN_WIDTH - 25)
+            coin.center_y = random.randrange(SCREEN_HEIGHT - 25)
 
-                # See if the coin is hitting a wall
-                wall_hit_list = arcade.check_for_collision_with_list(coin, room.wall_list)
-                # See if the coin is hitting another coin
-                coin_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list)
-                if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
-                    # It is!
-                    coin_placed_successfully = True
-            # Add the coin to the lists
-            room.coin_list.append(coin)
+            # See if the coin is hitting a wall
+            wall_hit_list = arcade.check_for_collision_with_list(coin, room.wall_list)
+            # See if the coin is hitting another coin
+            coin_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list)
+            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
+                # It is!
+                coin_placed_successfully = True
+        # Add the coin to the lists
+        room.coin_list.append(coin)
 
     return room
 
@@ -428,6 +429,7 @@ def setup_room_5():
     room.coin_list = arcade.SpriteList()
     room.star_list = arcade.SpriteList()
     room.enemy_list = arcade.SpriteList()
+    room.explosive_list = arcade.SpriteList()
 
     # Walls, Room 5, image from https://kenney.nl
     for x in range(50, SCREEN_WIDTH, 63):
@@ -466,26 +468,26 @@ def setup_room_5():
         wall.center_y = y
         room.wall_list.append(wall)
 
-    # Fireball, image from https://kenney.nl
+    # Coin, image from https://kenney.nl
     for i in range(NUMBER_OF_COINS):
-        coin = arcade.Sprite("fireball.png", SPRITE_SCALING)
+        coin = arcade.Sprite("coinGold.png", SPRITE_SCALING/2)
 
-        # Boolean variable fireball placement
+        # Boolean variable coin placement
         coin_placed_successfully = False
 
         while not coin_placed_successfully:
-            # Position the fireballs
+            # Position the coins
             coin.center_x = random.randrange(SCREEN_WIDTH - 25)
             coin.center_y = random.randrange(SCREEN_HEIGHT - 25)
 
-            # See if the fireball is hitting a wall
+            # See if the coin is hitting a wall
             wall_hit_list = arcade.check_for_collision_with_list(coin, room.wall_list)
-            # See if the fireball is hitting another coin
+            # See if the coin is hitting another coin
             coin_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list)
             if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
                 # It is!
                 coin_placed_successfully = True
-        # Add the fireball to the lists
+        # Add the coin to the lists
         room.coin_list.append(coin)
 
     # Stars, image from https://kenney.nl
@@ -510,27 +512,27 @@ def setup_room_5():
         # Add the star to the lists
         room.star_list.append(star)
 
-        # Bomb, image from https://kenney.nl
-        for i in range(ENEMY_NUMBER):
-            enemy = Enemy("bomb.png", SPRITE_SCALING/2)
+    # Bomb, image from https://kenney.nl
+    for i in range(ENEMY_NUMBER):
+        enemy = Enemy("bomb.png", SPRITE_SCALING/2)
 
-            # Boolean variable bomb placement
-            enemy_placed_successfully = False
+        # Boolean variable bomb placement
+        enemy_placed_successfully = False
 
-            while not enemy_placed_successfully:
-                # Position the bomb
-                enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
-                enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
+        while not enemy_placed_successfully:
+            # Position the bomb
+            enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
+            enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
 
-                # See if the bomb is hitting a wall
-                wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
-                # See if the bomb is hitting another star or coin
-                enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
-                if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
-                    # It is!
-                    enemy_placed_successfully = True
-            # Add the bomb to the lists
-            room.enemy_list.append(enemy)
+            # See if the bomb is hitting a wall
+            wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
+            # See if the bomb is hitting another star or coin
+            enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
+            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
+                # It is!
+                enemy_placed_successfully = True
+        # Add the bomb to the lists
+        room.enemy_list.append(enemy)
 
     return room
 
@@ -666,7 +668,9 @@ class MyGame(arcade.Window):
             self.score -= 1
 
         # If score drops below 0, game ends
-        #if self.score < 0:
+        if self.score < 0:
+            view = GameOverView()
+            self.window.show_view(view)
 
         # Room logic
         if self.player_sprite.center_x > SCREEN_WIDTH and self.current_room == 0:
@@ -709,6 +713,19 @@ class MyGame(arcade.Window):
             self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite,
                                                              self.rooms[self.current_room].wall_list)
             self.player_sprite.center_x = SCREEN_WIDTH
+
+
+class GameOverView(arcade.View):
+    def __init__(self):
+        super().__init__()
+
+    def on_show_view(self):
+        arcade.set_background_color(arcade.color.CORAL_RED)
+
+    def on_draw(self):
+        self.clear()
+        arcade.draw_text("Game Over", SCREEN_WIDTH/2, SCREEN_HEIGHT/2, arcade.color.DARK_SIENNA, 100)
+        arcade.draw_text(self.score, 550, 200, arcade.color.DARK_SIENNA, 20)
 
 
 def main():
