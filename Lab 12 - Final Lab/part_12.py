@@ -1,12 +1,14 @@
 import arcade
 import random
 
+
 SPRITE_SCALING = 0.5
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 600
 NUMBER_OF_COINS = 1
 NUMBER_OF_STARS = 1
 MOVEMENT_SPEED = 5
+ENEMY_SPEED = 1
 ENEMY_NUMBER = 1
 
 
@@ -21,18 +23,17 @@ class Room:
 
 
 class Enemy(arcade.Sprite):
+    def follow_sprite(self, player_sprite):
 
-    def follow_sprite(self, enemy):
+        if self.center_y < player_sprite.center_y:
+            self.center_y += min(ENEMY_SPEED, player_sprite.center_y - self.center_y)
+        elif self.center_y > player_sprite.center_y:
+            self.center_y -= min(ENEMY_SPEED, self.center_y - player_sprite.center_y)
 
-        if self.center_y < enemy.center_y:
-            self.center_y += min(MOVEMENT_SPEED, enemy.center_y - self.center_y)
-        elif self.center_y > enemy.center_y:
-            self.center_y -= min(MOVEMENT_SPEED, self.center_y - enemy.center_y)
-
-        if self.center_x < enemy.center_x:
-            self.center_x += min(MOVEMENT_SPEED, enemy.center_x - self.center_x)
-        elif self.center_x > enemy.center_x:
-            self.center_x -= min(MOVEMENT_SPEED, self.center_x - enemy.center_x)
+        if self.center_x < player_sprite.center_x:
+            self.center_x += min(ENEMY_SPEED, player_sprite.center_x - self.center_x)
+        elif self.center_x > player_sprite.center_x:
+            self.center_x -= min(ENEMY_SPEED, self.center_x - player_sprite.center_x)
 
 
 def setup_room_1():
@@ -257,7 +258,7 @@ def setup_room_3():
 
     # Mushroom, image from https://kenney.nl
     for i in range(NUMBER_OF_STARS):
-        star = arcade.Sprite("mushroomRed.png", SPRITE_SCALING)
+        star = arcade.Sprite("mushroomRed.png", SPRITE_SCALING/2)
 
         # Boolean variable star placement
         star_placed_successfully = False
@@ -279,10 +280,24 @@ def setup_room_3():
 
         # Bee, image from https://kenney.nl
         for i in range(ENEMY_NUMBER):
+            enemy = Enemy("bee.png", SPRITE_SCALING/2)
 
-            enemy = Enemy("bee.png", SPRITE_SCALING)
-            enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
-            enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
+            # Boolean variable placement
+            enemy_placed_successfully = False
+
+            while not enemy_placed_successfully:
+                # Position the bee
+                enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
+                enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
+
+                # See if the bee is hitting a wall
+                wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
+                # See if the bee is hitting another star or coin
+                enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
+                if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
+                    # It is!
+                    enemy_placed_successfully = True
+            # Add the bee to the lists
             room.enemy_list.append(enemy)
 
     return room
@@ -296,6 +311,7 @@ def setup_room_4():
     room.wall_list = arcade.SpriteList()
     room.coin_list = arcade.SpriteList()
     room.star_list = arcade.SpriteList()
+    room.enemy_list = arcade.SpriteList()
 
     # Walls, Room 4, image from https://kenney.nl
     for x in range(50, SCREEN_WIDTH, 63):
@@ -334,6 +350,72 @@ def setup_room_4():
         wall.center_y = y
         room.wall_list.append(wall)
 
+    # Red fish, image from https://kenney.nl
+    for i in range(NUMBER_OF_COINS):
+        coin = arcade.Sprite("fishTile_078.png", SPRITE_SCALING)
+
+        # Boolean variable fish placement
+        coin_placed_successfully = False
+
+        while not coin_placed_successfully:
+            # Position the fish
+            coin.center_x = random.randrange(SCREEN_WIDTH - 25)
+            coin.center_y = random.randrange(SCREEN_HEIGHT - 25)
+
+            # See if the fish is hitting a wall
+            wall_hit_list = arcade.check_for_collision_with_list(coin, room.wall_list)
+            # See if the fish is hitting another coin
+            coin_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list)
+            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
+                # It is!
+                coin_placed_successfully = True
+        # Add the fish to the lists
+        room.coin_list.append(coin)
+
+    # Puffer fish, image from https://kenney.nl
+    for i in range(NUMBER_OF_STARS):
+        star = arcade.Sprite("fishTile_100.png", SPRITE_SCALING)
+
+        # Boolean variable puffer fish placement
+        star_placed_successfully = False
+
+        while not star_placed_successfully:
+            # Position the puffer fish
+            star.center_x = random.randrange(SCREEN_WIDTH - 25)
+            star.center_y = random.randrange(SCREEN_HEIGHT - 25)
+
+            # See if the puffer fish is hitting a wall
+            wall_hit_list = arcade.check_for_collision_with_list(star, room.wall_list)
+            # See if the puffer fish is hitting another fish
+            star_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list, room.star_list)
+            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
+                # It is!
+                star_placed_successfully = True
+        # Add the puffer fish to the lists
+        room.star_list.append(star)
+
+        # Enemy fish, image from https://kenney.nl
+        for i in range(ENEMY_NUMBER):
+            enemy = Enemy("fishTile_090.png", SPRITE_SCALING)
+
+            # Boolean variable placement
+            enemy_placed_successfully = False
+
+            while not enemy_placed_successfully:
+                # Position the enemy fish
+                enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
+                enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
+
+                # See if the enemy fish is hitting a wall
+                wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
+                # See if the enemy fish is hitting another star or coin
+                enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
+                if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
+                    # It is!
+                    enemy_placed_successfully = True
+            # Add the enemy fish to the lists
+            room.enemy_list.append(enemy)
+
     return room
 
 
@@ -345,6 +427,7 @@ def setup_room_5():
     room.wall_list = arcade.SpriteList()
     room.coin_list = arcade.SpriteList()
     room.star_list = arcade.SpriteList()
+    room.enemy_list = arcade.SpriteList()
 
     # Walls, Room 5, image from https://kenney.nl
     for x in range(50, SCREEN_WIDTH, 63):
@@ -383,6 +466,72 @@ def setup_room_5():
         wall.center_y = y
         room.wall_list.append(wall)
 
+    # Fireball, image from https://kenney.nl
+    for i in range(NUMBER_OF_COINS):
+        coin = arcade.Sprite("fireball.png", SPRITE_SCALING)
+
+        # Boolean variable fireball placement
+        coin_placed_successfully = False
+
+        while not coin_placed_successfully:
+            # Position the fireballs
+            coin.center_x = random.randrange(SCREEN_WIDTH - 25)
+            coin.center_y = random.randrange(SCREEN_HEIGHT - 25)
+
+            # See if the fireball is hitting a wall
+            wall_hit_list = arcade.check_for_collision_with_list(coin, room.wall_list)
+            # See if the fireball is hitting another coin
+            coin_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list)
+            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
+                # It is!
+                coin_placed_successfully = True
+        # Add the fireball to the lists
+        room.coin_list.append(coin)
+
+    # Stars, image from https://kenney.nl
+    for i in range(NUMBER_OF_STARS):
+        star = arcade.Sprite("star.png", SPRITE_SCALING/2)
+
+        # Boolean variable star placement
+        star_placed_successfully = False
+
+        while not star_placed_successfully:
+            # Position the stars
+            star.center_x = random.randrange(SCREEN_WIDTH - 25)
+            star.center_y = random.randrange(SCREEN_HEIGHT - 25)
+
+            # See if the star is hitting a wall
+            wall_hit_list = arcade.check_for_collision_with_list(star, room.wall_list)
+            # See if the star is hitting another star or coin
+            star_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list, room.star_list)
+            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
+                # It is!
+                star_placed_successfully = True
+        # Add the star to the lists
+        room.star_list.append(star)
+
+        # Bomb, image from https://kenney.nl
+        for i in range(ENEMY_NUMBER):
+            enemy = Enemy("bomb.png", SPRITE_SCALING/2)
+
+            # Boolean variable bomb placement
+            enemy_placed_successfully = False
+
+            while not enemy_placed_successfully:
+                # Position the bomb
+                enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
+                enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
+
+                # See if the bomb is hitting a wall
+                wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
+                # See if the bomb is hitting another star or coin
+                enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
+                if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
+                    # It is!
+                    enemy_placed_successfully = True
+            # Add the bomb to the lists
+            room.enemy_list.append(enemy)
+
     return room
 
 
@@ -417,6 +566,7 @@ class MyGame(arcade.Window):
         self.player_sprite.center_y = 250
         self.player_list = arcade.SpriteList()
         self.player_list.append(self.player_sprite)
+        self.enemy_list = arcade.SpriteList()
 
         # Our list of rooms
         self.rooms = []
@@ -464,6 +614,8 @@ class MyGame(arcade.Window):
 
         # Draw player
         self.player_list.draw()
+
+        # Score
         arcade.draw_text(f"Score: {self.score}", 10, 10, arcade.color.WHITE, 24)
 
     def on_key_press(self, key, modifiers):
@@ -486,7 +638,11 @@ class MyGame(arcade.Window):
 
     def on_update(self, delta_time):
         """ Movement and game logic """
+
         self.physics_engine.update()
+
+        for enemy in self.enemy_list:
+            enemy.follow_sprite(self.player_sprite)
 
         # Generate a list of all sprites that collided with the player.
         coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
@@ -506,9 +662,8 @@ class MyGame(arcade.Window):
             star.remove_from_sprite_lists()
             self.score += 5
         for enemy in enemy_hit_list:
-            enemy.follow_sprite(self.player_sprite)
-            enemy.remove_from_sprite_lists()
-            self.score -= 3
+            arcade.play_sound(self.laser_sound)
+            self.score -= 1
 
         # If score drops below 0, game ends
         #if self.score < 0:
