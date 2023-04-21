@@ -1,5 +1,6 @@
 import arcade
 import random
+import math
 
 
 SPRITE_SCALING = 0.5
@@ -12,29 +13,53 @@ ENEMY_SPEED = 1
 ENEMY_NUMBER = 1
 
 
-class Room:
+class Enemy(arcade.Sprite):
+    """Enemy class"""
 
+    def follow_sprite(self, player_sprite):
+        """
+        This function will move the current sprite towards whatever
+        other sprite is specified as a parameter.
+
+        We use the 'min' function here to get the sprite to line up with
+        the target sprite, and not jump around if the sprite is not off
+        an exact multiple of SPRITE_SPEED.
+        """
+
+        self.center_x += self.change_x
+        self.center_y += self.change_y
+
+        # Random 1 in 100 chance that we'll change from our old direction and
+        # then re-aim toward the player
+        if random.randrange(100) == 0:
+            start_x = self.center_x
+            start_y = self.center_y
+
+            # Get the destination location for the bullet
+            dest_x = player_sprite.center_x
+            dest_y = player_sprite.center_y
+
+            # Do math to calculate how to get the bullet to the destination.
+            # Calculation the angle in radians between the start points
+            # and end points. This is the angle the bullet will travel.
+            x_diff = dest_x - start_x
+            y_diff = dest_y - start_y
+            angle = math.atan2(y_diff, x_diff)
+
+            # Taking into account the angle, calculate our change_x
+            # and change_y. Velocity is how fast the bullet travels.
+            self.change_x = math.cos(angle) * ENEMY_SPEED
+            self.change_y = math.sin(angle) * ENEMY_SPEED
+
+
+class Room:
+    """Room class"""
     def __init__(self):
         # Lists
         self.wall_list = None
         self.coin_list = None
         self.star_list = None
         self.enemy_list = None
-        self.explosive_list = None
-
-
-class Enemy(arcade.Sprite):
-    def follow_sprite(self, player_sprite):
-
-        if self.center_y < player_sprite.center_y:
-            self.center_y += min(ENEMY_SPEED, player_sprite.center_y - self.center_y)
-        elif self.center_y > player_sprite.center_y:
-            self.center_y -= min(ENEMY_SPEED, self.center_y - player_sprite.center_y)
-
-        if self.center_x < player_sprite.center_x:
-            self.center_x += min(ENEMY_SPEED, player_sprite.center_x - self.center_x)
-        elif self.center_x > player_sprite.center_x:
-            self.center_x -= min(ENEMY_SPEED, self.center_x - player_sprite.center_x)
 
 
 def setup_room_1():
@@ -91,6 +116,84 @@ def setup_room_1():
         wall.center_y = y
         room.wall_list.append(wall)
 
+    for y in range(300, 400, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 400
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(500, 600, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 400
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(200, 300, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 500
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(400, 500, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 500
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 200, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 600
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(500, 600, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 600
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(400, 500, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 700
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 200, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 800
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(300, 500, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 800
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(200, 300, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 900
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(400, 600, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 900
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(0, 200, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 1000
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 200, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = 1100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
     for y in range(0, 300, 32):
         wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
         wall.center_x = SCREEN_WIDTH
@@ -101,6 +204,102 @@ def setup_room_1():
         wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
         wall.center_x = SCREEN_WIDTH
         wall.center_y = y
+        room.wall_list.append(wall)
+
+    for x in range(100, 500, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(600, 800, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(900, 1000, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(0, 100, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(200, 600, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(700, 900, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(1100, 1200, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(0, 200, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(600, 800, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(900, 1100, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(300, 400, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(500, 700, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(800, 1100, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(200, 300, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 500
+        room.wall_list.append(wall)
+
+    for x in range(400, 500, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 500
+        room.wall_list.append(wall)
+
+    for x in range(1000, 1200, 32):
+        wall = arcade.Sprite("block_04.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 500
         room.wall_list.append(wall)
 
     # Coins, image from https://kenney.nl
@@ -126,26 +325,16 @@ def setup_room_1():
         room.coin_list.append(coin)
 
     # Zombie, image from https://kenney.nl
-    for i in range(ENEMY_NUMBER):
-        enemy = Enemy("character_zombie_hit.png", SPRITE_SCALING)
-
-        # Boolean variable placement
-        enemy_placed_successfully = False
-
-        while not enemy_placed_successfully:
-            # Position the zombie
-            enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
-            enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
-
-            # See if the zombie is hitting a wall
-            wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
-            # See if the zombie is hitting another star or coin
-            enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list)
-            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
-                # It is!
-                enemy_placed_successfully = True
+    """for i in range(ENEMY_NUMBER):
+        position_list = [[1150, 450],
+                         [1150, 350],
+                         [1150, 250]]
+        enemy = Enemy("character_zombie_hit.png", SPRITE_SCALING, position_list)
+        # Position the zombie
+        enemy.center_x = position_list[0][0]
+        enemy.center_y = position_list[0][1]
         # Add the zombie to the lists
-        room.enemy_list.append(enemy)
+        room.enemy_list.append(enemy)"""
 
     return room
 
@@ -180,6 +369,126 @@ def setup_room_2():
         wall.center_y = y
         room.wall_list.append(wall)
 
+    for y in range(300, 400, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 200, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 200
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(500, 600, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 200
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 300, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 300
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(400, 500, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 300
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 400, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 400
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(500, 600, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 400
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(0, 100, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 500
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(300, 500, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 500
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(200, 300, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 600
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(400, 600, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 600
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 300, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 700
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(400, 600, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 700
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(0, 100, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 800
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 300, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 900
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(400, 500, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 900
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(0, 100, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 1000
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(300, 500, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 1000
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 300, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 1100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(500, 600, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = 1100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
     for y in range(0, 200, 32):
         wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
         wall.center_x = SCREEN_WIDTH
@@ -190,6 +499,102 @@ def setup_room_2():
         wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
         wall.center_x = SCREEN_WIDTH
         wall.center_y = y
+        room.wall_list.append(wall)
+
+    for x in range(100, 200, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(300, 400, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(500, 600, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(700, 800, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(0, 200, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(500, 700, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(800, 1200, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(100, 300, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(400, 500, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(700, 800, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(100, 300, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(700, 800, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(900, 1200, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(0, 100, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 500
+        room.wall_list.append(wall)
+
+    for x in range(400, 500, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 500
+        room.wall_list.append(wall)
+
+    for x in range(800, 900, 32):
+        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 500
         room.wall_list.append(wall)
 
     # Coins, image from https://kenney.nl
@@ -214,49 +619,38 @@ def setup_room_2():
         # Add the coin to the lists
         room.coin_list.append(coin)
 
-        # Stars, image from https://kenney.nl
-        for i in range(NUMBER_OF_STARS):
-            star = arcade.Sprite("star.png", SPRITE_SCALING/2)
+    # Stars, image from https://kenney.nl
+    for i in range(NUMBER_OF_STARS):
+        star = arcade.Sprite("star.png", SPRITE_SCALING/2)
 
-            # Boolean variable star placement
-            star_placed_successfully = False
+        # Boolean variable star placement
+        star_placed_successfully = False
 
-            while not star_placed_successfully:
-                # Position the stars
-                star.center_x = random.randrange(SCREEN_WIDTH - 25)
-                star.center_y = random.randrange(SCREEN_HEIGHT - 25)
+        while not star_placed_successfully:
+            # Position the stars
+            star.center_x = random.randrange(SCREEN_WIDTH - 25)
+            star.center_y = random.randrange(SCREEN_HEIGHT - 25)
 
-                # See if the star is hitting a wall
-                wall_hit_list = arcade.check_for_collision_with_list(star, room.wall_list)
-                # See if the star is hitting another star or coin
-                star_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list, room.star_list)
-                if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
-                    # It is!
-                    star_placed_successfully = True
-            # Add the star to the lists
-            room.star_list.append(star)
+            # See if the star is hitting a wall
+            wall_hit_list = arcade.check_for_collision_with_list(star, room.wall_list)
+            # See if the star is hitting another star or coin
+            star_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list, room.star_list)
+            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
+                # It is!
+                star_placed_successfully = True
+        # Add the star to the lists
+        room.star_list.append(star)
 
     # Alien, image from https://kenney.nl
-    for i in range(ENEMY_NUMBER):
-        enemy = Enemy("alienBlue_front.png", SPRITE_SCALING)
-
-        # Boolean variable placement
-        enemy_placed_successfully = False
-
-        while not enemy_placed_successfully:
-            # Position the alien
-            enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
-            enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
-
-            # See if the alien is hitting a wall
-            wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
-            # See if the alien is hitting another star or coin
-            enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
-            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
-                # It is!
-                enemy_placed_successfully = True
+    """for i in range(ENEMY_NUMBER):
+        position_list = [[1150, 500],
+                         [1150, 50]]
+        enemy = Enemy("alienBlue_front.png", SPRITE_SCALING, position_list)
+        # Position the alien
+        enemy.center_x = position_list[0][0]
+        enemy.center_y = position_list[0][1]
         # Add the alien to the lists
-        room.enemy_list.append(enemy)
+        room.enemy_list.append(enemy)"""
 
     return room
 
@@ -348,26 +742,15 @@ def setup_room_3():
         room.star_list.append(star)
 
     # Bee, image from https://kenney.nl
-    for i in range(ENEMY_NUMBER):
-        enemy = Enemy("bee.png", SPRITE_SCALING)
-
-        # Boolean variable placement
-        enemy_placed_successfully = False
-
-        while not enemy_placed_successfully:
-            # Position the bee
-            enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
-            enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
-
-            # See if the bee is hitting a wall
-            wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
-            # See if the bee is hitting another star or coin
-            enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
-            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
-                # It is!
-                enemy_placed_successfully = True
+    """for i in range(ENEMY_NUMBER):
+        position_list = [[1150, 500],
+                         [1150, 50]]
+        enemy = Enemy("bee.png", SPRITE_SCALING, position_list)
+        # Position the bee
+        enemy.center_x = position_list[0][0]
+        enemy.center_y = position_list[0][1]
         # Add the bee to the lists
-        room.enemy_list.append(enemy)
+        room.enemy_list.append(enemy)"""
 
     return room
 
@@ -464,26 +847,15 @@ def setup_room_4():
         room.star_list.append(star)
 
     # Enemy fish, image from https://kenney.nl
-    for i in range(ENEMY_NUMBER):
-        enemy = Enemy("fishTile_090.png", SPRITE_SCALING * 2)
-
-        # Boolean variable placement
-        enemy_placed_successfully = False
-
-        while not enemy_placed_successfully:
-            # Position the enemy fish
-            enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
-            enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
-
-            # See if the enemy fish is hitting a wall
-            wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
-            # See if the enemy fish is hitting another star or coin
-            enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
-            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
-                # It is!
-                enemy_placed_successfully = True
+    """for i in range(ENEMY_NUMBER):
+        position_list = [[1150, 500],
+                         [1150, 50]]
+        enemy = Enemy("fishTile_090.png", SPRITE_SCALING, position_list)
+        # Position the enemy fish
+        enemy.center_x = position_list[0][0]
+        enemy.center_y = position_list[0][1]
         # Add the enemy fish to the lists
-        room.enemy_list.append(enemy)
+        room.enemy_list.append(enemy)"""
 
     return room
 
@@ -497,7 +869,6 @@ def setup_room_5():
     room.coin_list = arcade.SpriteList()
     room.star_list = arcade.SpriteList()
     room.enemy_list = arcade.SpriteList()
-    room.explosive_list = arcade.SpriteList()
 
     # Walls, Room 5, image from https://kenney.nl
     for x in range(50, SCREEN_WIDTH, 63):
@@ -581,26 +952,15 @@ def setup_room_5():
         room.star_list.append(star)
 
     # Bomb, image from https://kenney.nl
-    for i in range(ENEMY_NUMBER):
-        enemy = Enemy("bomb.png", SPRITE_SCALING)
-
-        # Boolean variable bomb placement
-        enemy_placed_successfully = False
-
-        while not enemy_placed_successfully:
-            # Position the bomb
-            enemy.center_x = random.randrange(SCREEN_WIDTH - 25)
-            enemy.center_y = random.randrange(SCREEN_HEIGHT - 25)
-
-            # See if the bomb is hitting a wall
-            wall_hit_list = arcade.check_for_collision_with_list(enemy, room.wall_list)
-            # See if the bomb is hitting another star or coin
-            enemy_hit_list = arcade.check_for_collision_with_list(enemy, room.coin_list, room.star_list)
-            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0 and len(star_hit_list) == 0:
-                # It is!
-                enemy_placed_successfully = True
+    """for i in range(ENEMY_NUMBER):
+        position_list = [[1150, 500],
+                         [1150, 50]]
+        enemy = Enemy("bomb.png", SPRITE_SCALING, position_list)
+        # Position the bomb
+        enemy.center_x = position_list[0][0]
+        enemy.center_y = position_list[0][1]
         # Add the bomb to the lists
-        room.enemy_list.append(enemy)
+        room.enemy_list.append(enemy)"""
 
     return room
 
@@ -609,9 +969,7 @@ class GameView(arcade.View):
     """ Main application class. """
 
     def __init__(self):
-        """
-        Initializer
-        """
+        """Initializer"""
         super().__init__()
 
         # Sprite lists
@@ -620,11 +978,13 @@ class GameView(arcade.View):
         # Set up the player
         self.rooms = None
         self.player_sprite = None
+        self.enemy = None
         self.player_list = None
         self.coin_list = None
         self.star_list = None
         self.enemy_list = None
         self.physics_engine = None
+        self.enemy_physics_engine = None
         # Sound
         self.laser_sound = arcade.load_sound("laser.wav")
 
@@ -636,7 +996,21 @@ class GameView(arcade.View):
         self.player_sprite.center_y = 250
         self.player_list = arcade.SpriteList()
         self.player_list.append(self.player_sprite)
+        # Set up enemy
+
+        self.enemy = Enemy("character_zombie_hit.png", SPRITE_SCALING)
+
+        # Position the coin
+        self.enemy.center_x = 1150
+        self.enemy.center_y = 550
+
+
+            # Add the coin to the lists
+
         self.enemy_list = arcade.SpriteList()
+        self.enemy_list.append(self.enemy)
+        self.coin_list = arcade.SpriteList()
+        self.star_list = arcade.SpriteList()
 
         # Our list of rooms
         self.rooms = []
@@ -661,8 +1035,8 @@ class GameView(arcade.View):
         self.current_room = 0
 
         # Create a physics engine for this room
-        self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite,
-                                                         self.rooms[self.current_room].wall_list)
+        self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite, self.rooms[self.current_room].wall_list)
+
         # Reset the score
         self.score = 0
 
@@ -680,7 +1054,7 @@ class GameView(arcade.View):
         self.rooms[self.current_room].star_list.draw()
 
         # Draw enemy
-        self.rooms[self.current_room].enemy_list.draw()
+        self.enemy_list.draw()
 
         # Draw player
         self.player_list.draw()
@@ -710,9 +1084,10 @@ class GameView(arcade.View):
         """ Movement and game logic """
 
         self.physics_engine.update()
+        self.coin_list.update()
+        self.star_list.update()
+        self.enemy_list.update()
 
-        for enemy in self.enemy_list:
-            enemy.follow_sprite(self.player_sprite)
 
         # Generate a list of all sprites that collided with the player.
         coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
@@ -792,6 +1167,7 @@ class GameView(arcade.View):
 
 
 class GameOverView(arcade.View):
+    """Game Over Screen"""
     def __init__(self):
         super().__init__()
 
