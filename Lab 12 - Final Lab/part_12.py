@@ -585,12 +585,6 @@ def setup_room_2():
         wall.center_y = 500
         room.wall_list.append(wall)
 
-    for x in range(400, 500, 32):
-        wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
-        wall.center_x = x
-        wall.center_y = 500
-        room.wall_list.append(wall)
-
     for x in range(800, 900, 32):
         wall = arcade.Sprite("tileBlue_03.png", SPRITE_SCALING)
         wall.center_x = x
@@ -685,6 +679,108 @@ def setup_room_3():
         wall.center_y = y
         room.wall_list.append(wall)
 
+    for y in range(200, 500, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 200, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 200
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(500, 600, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 200
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(0, 100, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 300
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 500, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 400
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 200, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 500
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(200, 500, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 600
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 200, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 700
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(300, 400, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 700
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(500, 600, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 700
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(0, 100, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 800
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(200, 500, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 800
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 200, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 900
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(400, 600, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 900
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(0, 100, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 1000
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(300, 400, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 1000
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(400, 500, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = 1100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
     for y in range(0, 300, 32):
         wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
         wall.center_x = SCREEN_WIDTH
@@ -695,6 +791,114 @@ def setup_room_3():
         wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
         wall.center_x = SCREEN_WIDTH
         wall.center_y = y
+        room.wall_list.append(wall)
+
+    for x in range(100, 200, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(300, 400, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(500, 700, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(800, 900, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(1000, 1100, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(100, 300, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(700, 800, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(900, 1100, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(0, 100, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(200, 400, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(500, 600, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(800, 1200, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(100, 300, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(400, 500, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(600, 700, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(200, 300, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 500
+        room.wall_list.append(wall)
+
+    for x in range(400, 600, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 500
+        room.wall_list.append(wall)
+
+    for x in range(900, 1100, 32):
+        wall = arcade.Sprite("ground_05.png", SPRITE_SCALING)
+        wall.center_x = x
+        wall.center_y = 500
         room.wall_list.append(wall)
 
     # Flowers, image from https://kenney.nl
@@ -778,28 +982,220 @@ def setup_room_4():
         wall.center_y = SCREEN_HEIGHT
         room.wall_list.append(wall)
 
-    for y in range(0, 300, 63):
-        wall = arcade.Sprite("water.png", SPRITE_SCALING)
+    for y in range(0, 300, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
         wall.center_x = 0
         wall.center_y = y
         room.wall_list.append(wall)
 
-    for y in range(400, SCREEN_HEIGHT, 63):
-        wall = arcade.Sprite("water.png", SPRITE_SCALING)
+    for y in range(400, SCREEN_HEIGHT, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
         wall.center_x = 0
         wall.center_y = y
         room.wall_list.append(wall)
 
-    for y in range(0, 200, 63):
-        wall = arcade.Sprite("water.png", SPRITE_SCALING)
+    for y in range(0, 100, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(200, 400, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 200, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 200
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(0, 100, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 300
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(300, 600, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 300
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 300, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 400
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(200, 500, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 500
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 200, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 600
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(400, 600, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 600
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(0, 200, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 700
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(300, 500, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 700
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 200, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 800
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(500, 600, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 800
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 400, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 900
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 300, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 1000
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(200, 300, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = 1100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(0, 200, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
         wall.center_x = SCREEN_WIDTH
         wall.center_y = y
         room.wall_list.append(wall)
 
-    for y in range(300, SCREEN_HEIGHT, 63):
-        wall = arcade.Sprite("water.png", SPRITE_SCALING)
+    for y in range(300, SCREEN_HEIGHT, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
         wall.center_x = SCREEN_WIDTH
         wall.center_y = y
+        room.wall_list.append(wall)
+
+    for x in range(400, 600, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(800, 900, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(1000, 1100, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 100
+        room.wall_list.append(wall)
+
+    for x in range(100, 300, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(600, 700, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(1100, 1200, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 200
+        room.wall_list.append(wall)
+
+    for x in range(200, 300, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(500, 900, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(1000, 1100, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 300
+        room.wall_list.append(wall)
+
+    for x in range(100, 300, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(400, 500, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(700, 800, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(900, 1200, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 400
+        room.wall_list.append(wall)
+
+    for x in range(0, 200, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 500
+        room.wall_list.append(wall)
+
+    for x in range(300, 400, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 500
+        room.wall_list.append(wall)
+
+    for x in range(800, 1100, 32):
+        wall = arcade.Sprite("water.png", SPRITE_SCALING/2)
+        wall.center_x = x
+        wall.center_y = 500
         room.wall_list.append(wall)
 
     # Red fish, image from https://kenney.nl
@@ -883,25 +1279,61 @@ def setup_room_5():
         wall.center_y = SCREEN_HEIGHT
         room.wall_list.append(wall)
 
-    for y in range(0, 200, 63):
-        wall = arcade.Sprite("lava.png", SPRITE_SCALING)
+    for y in range(0, 200, 32):
+        wall = arcade.Sprite("lava.png", SPRITE_SCALING/2)
         wall.center_x = 0
         wall.center_y = y
         room.wall_list.append(wall)
 
-    for y in range(300, SCREEN_HEIGHT, 63):
-        wall = arcade.Sprite("lava.png", SPRITE_SCALING)
+    for y in range(300, SCREEN_HEIGHT, 32):
+        wall = arcade.Sprite("lava.png", SPRITE_SCALING/2)
         wall.center_x = 0
         wall.center_y = y
         room.wall_list.append(wall)
 
-    for y in range(0, 300, 63):
+    for y in range(0, 100, 32):
+        wall = arcade.Sprite("lava.png", SPRITE_SCALING/2)
+        wall.center_x = 100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(300, 500, 32):
+        wall = arcade.Sprite("lava.png", SPRITE_SCALING/2)
+        wall.center_x = 100
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(100, 300, 32):
+        wall = arcade.Sprite("lava.png", SPRITE_SCALING/2)
+        wall.center_x = 200
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(500, 600, 32):
+        wall = arcade.Sprite("lava.png", SPRITE_SCALING)
+        wall.center_x = 200
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(0, 300, 32):
+        wall = arcade.Sprite("lava.png", SPRITE_SCALING)
+        wall.center_x = 300
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(400, 500, 32):
+        wall = arcade.Sprite("lava.png", SPRITE_SCALING)
+        wall.center_x = 300
+        wall.center_y = y
+        room.wall_list.append(wall)
+
+    for y in range(0, 300, 32):
         wall = arcade.Sprite("lava.png", SPRITE_SCALING)
         wall.center_x = SCREEN_WIDTH
         wall.center_y = y
         room.wall_list.append(wall)
 
-    for y in range(400, SCREEN_HEIGHT, 63):
+    for y in range(400, SCREEN_HEIGHT, 32):
         wall = arcade.Sprite("lava.png", SPRITE_SCALING)
         wall.center_x = SCREEN_WIDTH
         wall.center_y = y
