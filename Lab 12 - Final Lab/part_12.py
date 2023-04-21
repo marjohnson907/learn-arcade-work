@@ -5,10 +5,32 @@ import random
 SPRITE_SCALING = 0.5
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 600
-NUMBER_OF_COINS = 50
+NUMBER_OF_COINS = 20
 NUMBER_OF_STARS = 10
-NUMBER_OF_BOMBS = 5
 MOVEMENT_SPEED = 5
+
+
+class StartView(arcade.View):
+    def on_show_view(self):
+        arcade.set_background_color(arcade.color.BLACK)
+
+    def on_draw(self):
+        self.clear()
+        arcade.draw_text("MAZE ADVENTURE", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 200,
+                         arcade.color.WHITE, font_size=50, anchor_x="center")
+        arcade.draw_text("Use Arrow Keys to Move", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 90,
+                         arcade.color.FOREST_GREEN, font_size=20, anchor_x="center")
+        arcade.draw_text("Collect points and avoid explosives!", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                         arcade.color.FOREST_GREEN, font_size=20, anchor_x="center")
+        arcade.draw_text("PRESS ENTER TO START", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4,
+                         arcade.color.RED, font_size=30, anchor_x="center")
+
+    def on_key_press(self, key, modifiers):
+        """Called whenever a key is pressed. """
+        if key == arcade.key.ENTER:
+            game_view = GameView()
+            game_view.setup()
+            self.window.show_view(game_view)
 
 
 class Room:
@@ -282,6 +304,19 @@ def setup_room_1():
                 coin_placed_successfully = True
         # Add the coin to the lists
         room.coin_list.append(coin)
+
+    # Bombs, image from https://kenney.nl
+    coordinate_list = [[1150, 360],
+                       [930, 260],
+                       [640, 40],
+                       [550, 250],
+                       [50, 150]]
+    # Loop through coordinates
+    for coordinate in coordinate_list:
+        bomb = arcade.Sprite("boxExplosive.png", SPRITE_SCALING/2)
+        bomb.center_x = coordinate[0]
+        bomb.center_y = coordinate[1]
+        room.bomb_list.append(bomb)
 
     return room
 
@@ -582,6 +617,20 @@ def setup_room_2():
         # Add the star to the lists
         room.star_list.append(star)
 
+        # Bomb, image from https://kenney.nl
+        coordinate_list = [[360, 260],
+                           [260, 440],
+                           [550, 330],
+                           [840, 140],
+                           [540, 850],
+                           [1000, 260]]
+        # Loop through coordinates
+        for coordinate in coordinate_list:
+            bomb = arcade.Sprite("bomb.png", SPRITE_SCALING / 2)
+            bomb.center_x = coordinate[0]
+            bomb.center_y = coordinate[1]
+            room.bomb_list.append(bomb)
+
     return room
 
 
@@ -881,27 +930,20 @@ def setup_room_3():
         # Add the star to the lists
         room.star_list.append(star)
 
-    # Bomb, image from https://kenney.nl
-    for i in range(NUMBER_OF_BOMBS):
-        bomb = arcade.Sprite("bomb.png", SPRITE_SCALING)
-
-        # Boolean variable placement
-        bomb_placed_successfully = False
-
-        while not bomb_placed_successfully:
-            # Position the bombs
-            bomb.center_x = random.randrange(SCREEN_WIDTH - 100)
-            bomb.center_y = random.randrange(SCREEN_HEIGHT - 100)
-
-            # See if the bomb is hitting a wall
-            wall_hit_list = arcade.check_for_collision_with_list(bomb, room.wall_list)
-            # See if the star is hitting another star or coin
-            bomb_hit_list = arcade.check_for_collision_with_list(bomb, room.coin_list, room.star_list)
-            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
-                # It is!
-                bomb_placed_successfully = True
-        # Add the bombs to the lists
-        room.bomb_list.append(bomb)
+        # Bomb, image from https://kenney.nl
+        coordinate_list = [[60, 260],
+                           [1100, 330],
+                           [860, 130],
+                           [450, 30],
+                           [460, 340],
+                           [40, 570],
+                           [650, 450]]
+        # Loop through coordinates
+        for coordinate in coordinate_list:
+            bomb = arcade.Sprite("boxExplosive.png", SPRITE_SCALING / 2)
+            bomb.center_x = coordinate[0]
+            bomb.center_y = coordinate[1]
+            room.bomb_list.append(bomb)
 
     return room
 
@@ -1189,27 +1231,21 @@ def setup_room_4():
         # Add the puffer fish to the lists
         room.star_list.append(star)
 
-    # Explosive, image from https://kenney.nl
-    for i in range(NUMBER_OF_BOMBS):
-        bomb = arcade.Sprite("boxExplosive.png", SPRITE_SCALING)
-
-        # Boolean variable placement
-        bomb_placed_successfully = False
-
-        while not bomb_placed_successfully:
-            # Position the bombs
-            bomb.center_x = random.randrange(SCREEN_WIDTH - 100)
-            bomb.center_y = random.randrange(SCREEN_HEIGHT - 100)
-
-            # See if the bomb is hitting a wall
-            wall_hit_list = arcade.check_for_collision_with_list(bomb, room.wall_list)
-            # See if the star is hitting another star or coin
-            bomb_hit_list = arcade.check_for_collision_with_list(bomb, room.coin_list, room.star_list)
-            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
-                # It is!
-                bomb_placed_successfully = True
-        # Add the bombs to the lists
-        room.bomb_list.append(bomb)
+        # Bomb, image from https://kenney.nl
+        coordinate_list = [[150, 160],
+                           [360, 440],
+                           [360, 150],
+                           [400, 540],
+                           [770, 480],
+                           [960, 80],
+                           [940, 360],
+                           [650, 340]]
+        # Loop through coordinates
+        for coordinate in coordinate_list:
+            bomb = arcade.Sprite("bomb.png", SPRITE_SCALING / 2)
+            bomb.center_x = coordinate[0]
+            bomb.center_y = coordinate[1]
+            room.bomb_list.append(bomb)
 
     return room
 
@@ -1510,25 +1546,26 @@ def setup_room_5():
         room.star_list.append(star)
 
     # Fireball, image from https://kenney.nl
-    for i in range(NUMBER_OF_BOMBS):
-        bomb = arcade.Sprite("fireball.png", SPRITE_SCALING * 2)
-
-        # Boolean variable placement
-        bomb_placed_successfully = False
-
-        while not bomb_placed_successfully:
-            # Position the bombs
-            bomb.center_x = random.randrange(SCREEN_WIDTH - 100)
-            bomb.center_y = random.randrange(SCREEN_HEIGHT - 100)
-
-            # See if the bomb is hitting a wall
-            wall_hit_list = arcade.check_for_collision_with_list(bomb, room.wall_list)
-            # See if the star is hitting another star or coin
-            bomb_hit_list = arcade.check_for_collision_with_list(bomb, room.coin_list, room.star_list)
-            if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
-                # It is!
-                bomb_placed_successfully = True
-        # Add the bombs to the lists
+    coordinate_list = [[40, 560],
+                       [200, 480],
+                       [300, 320],
+                       [400, 70],
+                       [400, 480],
+                       [500, 270],
+                       [530, 460],
+                       [700, 420],
+                       [700, 270],
+                       [800, 480],
+                       [800, 340],
+                       [680, 130],
+                       [1050, 430],
+                       [920, 230],
+                       [1140, 350]]
+    # Loop through coordinates
+    for coordinate in coordinate_list:
+        bomb = arcade.Sprite("fireball.png", SPRITE_SCALING)
+        bomb.center_x = coordinate[0]
+        bomb.center_y = coordinate[1]
         room.bomb_list.append(bomb)
 
     return room
@@ -1644,7 +1681,6 @@ class GameView(arcade.View):
         self.star_list.update()
         self.bomb_list.update()
 
-
         # Generate a list of all sprites that collided with the player.
         coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
                                                               self.rooms[self.current_room].coin_list)
@@ -1664,10 +1700,6 @@ class GameView(arcade.View):
             self.score += 5
         for bomb in bomb_hit_list:
             arcade.play_sound(self.laser_sound)
-            bomb.remove_from_sprite_lists()
-            self.score -= 1
-
-        if self.score < 0:
             view = GameOverView()
             self.window.show_view(view)
 
@@ -1718,7 +1750,7 @@ class GameView(arcade.View):
                                                              self.rooms[self.current_room].wall_list)
             self.player_sprite.center_x = SCREEN_WIDTH
         elif self.player_sprite.center_x > SCREEN_WIDTH and self.current_room == 4:
-            view = GameOverView()
+            view = WinnerView()
             self.window.show_view(view)
 
 
@@ -1733,14 +1765,28 @@ class GameOverView(arcade.View):
     def on_draw(self):
         self.clear()
         arcade.draw_text("Game Over", 250, SCREEN_HEIGHT/2, arcade.color.DARK_SIENNA, 100)
+        arcade.draw_text("Press Enter to Try Again", SCREEN_WIDTH/4, SCREEN_HEIGHT/4, arcade.color.BLACK, 25)
+
+
+class WinnerView(arcade.View):
+    """Screen for the end of the game"""
+    def __init__(self):
+        super().__init__()
+
+    def on_show_view(self):
+        arcade.set_background_color(arcade.color.BLACK)
+
+    def on_draw(self):
+        self.clear()
+        arcade.draw_text("You win!", 100, SCREEN_HEIGHT/2, arcade.color.WHITE, 100)
+        arcade.draw_text("Press enter to play again.", SCREEN_WIDTH/2, SCREEN_HEIGHT/2 - 100, 50)
 
 
 def main():
     """ Main function """
     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT)
-    start_view = GameView()
+    start_view = GameOverView()
     window.show_view(start_view)
-    start_view.setup()
     arcade.run()
 
 
