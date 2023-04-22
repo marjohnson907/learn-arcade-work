@@ -11,11 +11,13 @@ MOVEMENT_SPEED = 5
 
 
 class StartView(arcade.View):
+
     def on_show_view(self):
         arcade.set_background_color(arcade.color.BLACK)
 
     def on_draw(self):
         self.clear()
+
         arcade.draw_text("MAZE ADVENTURE", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 200,
                          arcade.color.WHITE, font_size=50, anchor_x="center")
         arcade.draw_text("Use Arrow Keys to Move", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 90,
@@ -310,7 +312,13 @@ def setup_room_1():
                        [930, 260],
                        [640, 40],
                        [550, 250],
-                       [50, 150]]
+                       [50, 150],
+                       [50, 550],
+                       [1150, 550],
+                       [1150, 150],
+                       [260, 450],
+                       [460, 470],
+                       [750, 560]]
     # Loop through coordinates
     for coordinate in coordinate_list:
         bomb = arcade.Sprite("boxExplosive.png", SPRITE_SCALING/2)
@@ -575,7 +583,7 @@ def setup_room_2():
 
     # Coins, image from https://kenney.nl
     for i in range(NUMBER_OF_COINS):
-        coin = arcade.Sprite("coinSilver.png", SPRITE_SCALING/2)
+        coin = arcade.Sprite("coinGold.png", SPRITE_SCALING/2)
 
         # Boolean variable coin placement
         coin_placed_successfully = False
@@ -620,10 +628,14 @@ def setup_room_2():
         # Bomb, image from https://kenney.nl
         coordinate_list = [[360, 260],
                            [260, 440],
-                           [550, 330],
-                           [840, 140],
+                           [540, 350],
+                           [830, 120],
                            [540, 850],
-                           [1000, 260]]
+                           [1000, 270],
+                           [50, 550],
+                           [150, 150],
+                           [1150, 150],
+                           [1150, 550]]
         # Loop through coordinates
         for coordinate in coordinate_list:
             bomb = arcade.Sprite("bomb.png", SPRITE_SCALING / 2)
@@ -931,13 +943,18 @@ def setup_room_3():
         room.star_list.append(star)
 
         # Bomb, image from https://kenney.nl
-        coordinate_list = [[60, 260],
+        coordinate_list = [[40, 40],
                            [1100, 330],
-                           [860, 130],
-                           [450, 30],
-                           [460, 340],
-                           [40, 570],
-                           [650, 450]]
+                           [860, 140],
+                           [450, 40],
+                           [440, 360],
+                           [40, 560],
+                           [640, 440],
+                           [260, 360],
+                           [950, 550],
+                           [1165, 265],
+                           [1050, 50],
+                           [840, 340]]
         # Loop through coordinates
         for coordinate in coordinate_list:
             bomb = arcade.Sprite("boxExplosive.png", SPRITE_SCALING / 2)
@@ -1233,13 +1250,20 @@ def setup_room_4():
 
         # Bomb, image from https://kenney.nl
         coordinate_list = [[150, 160],
-                           [360, 440],
-                           [360, 150],
-                           [400, 540],
+                           [330, 460],
+                           [365, 150],
+                           [350, 540],
                            [770, 480],
-                           [960, 80],
                            [940, 360],
-                           [650, 340]]
+                           [650, 340],
+                           [50, 550],
+                           [50, 50],
+                           [465, 365],
+                           [850, 150],
+                           [750, 350],
+                           [850, 550],
+                           [1050, 250],
+                           [540, 360]]
         # Loop through coordinates
         for coordinate in coordinate_list:
             bomb = arcade.Sprite("bomb.png", SPRITE_SCALING / 2)
@@ -1546,21 +1570,30 @@ def setup_room_5():
         room.star_list.append(star)
 
     # Fireball, image from https://kenney.nl
-    coordinate_list = [[40, 560],
-                       [200, 480],
+    coordinate_list = [[40, 550],
+                       [200, 470],
                        [300, 320],
-                       [400, 70],
-                       [400, 480],
+                       [340, 50],
+                       [400, 470],
                        [500, 270],
-                       [530, 460],
-                       [700, 420],
+                       [540, 460],
+                       [700, 440],
                        [700, 270],
-                       [800, 480],
+                       [760, 500],
                        [800, 340],
-                       [680, 130],
+                       [660, 130],
                        [1050, 430],
-                       [920, 230],
-                       [1140, 350]]
+                       [930, 240],
+                       [1140, 350],
+                       [50, 50],
+                       [140, 360],
+                       [1150, 150],
+                       [750, 150],
+                       [160, 160],
+                       [160, 230],
+                       [500, 130],
+                       [850, 250],
+                       [1160, 560]]
     # Loop through coordinates
     for coordinate in coordinate_list:
         bomb = arcade.Sprite("fireball.png", SPRITE_SCALING)
@@ -1697,9 +1730,13 @@ class GameView(arcade.View):
         for star in star_hit_list:
             arcade.play_sound(self.laser_sound)
             star.remove_from_sprite_lists()
-            self.score += 5
+            self.score += 3
         for bomb in bomb_hit_list:
             arcade.play_sound(self.laser_sound)
+            bomb.remove_from_sprite_lists()
+            self.score -= 10
+
+        if self.score < 0:
             view = GameOverView()
             self.window.show_view(view)
 
@@ -1765,7 +1802,16 @@ class GameOverView(arcade.View):
     def on_draw(self):
         self.clear()
         arcade.draw_text("Game Over", 250, SCREEN_HEIGHT/2, arcade.color.DARK_SIENNA, 100)
-        arcade.draw_text("Press Enter to Try Again", SCREEN_WIDTH/4, SCREEN_HEIGHT/4, arcade.color.BLACK, 25)
+        arcade.draw_text("Press Enter to Try Again", SCREEN_WIDTH/4 + 100, SCREEN_HEIGHT/4, arcade.color.BLACK, 25)
+        arcade.draw_text("Press Esc to Quit", SCREEN_WIDTH/4 + 150, SCREEN_HEIGHT/4 - 100, arcade.color.BLACK, 25)
+
+    def on_key_press(self, key, modifiers):
+        """Play game again when player presses Enter. """
+        if key == arcade.key.ENTER:
+            start_view = StartView()
+            self.window.show_view(start_view)
+        if key == arcade.key.ESCAPE:
+            self.window.close()
 
 
 class WinnerView(arcade.View):
@@ -1778,14 +1824,24 @@ class WinnerView(arcade.View):
 
     def on_draw(self):
         self.clear()
-        arcade.draw_text("You win!", 100, SCREEN_HEIGHT/2, arcade.color.WHITE, 100)
-        arcade.draw_text("Press enter to play again.", SCREEN_WIDTH/2, SCREEN_HEIGHT/2 - 100, 50)
+        arcade.draw_text("You win!", SCREEN_WIDTH/2 - 250, SCREEN_HEIGHT/2, arcade.color.WHITE, 100)
+        arcade.draw_text("Press enter to play again.", SCREEN_WIDTH/2 - 350, SCREEN_HEIGHT/2 - 100,
+                         arcade.color.WHITE, 50)
+        arcade.draw_text("Press Esc to Quit", SCREEN_WIDTH/2 - 250, SCREEN_HEIGHT/2 - 200, arcade.color.WHITE, 50)
+
+    def on_key_press(self, key, modifiers):
+        """Play game again when player presses Enter. """
+        if key == arcade.key.ENTER:
+            start_view = StartView()
+            self.window.show_view(start_view)
+        if key == arcade.key.ESCAPE:
+            self.window.close()
 
 
 def main():
     """ Main function """
     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT)
-    start_view = GameOverView()
+    start_view = WinnerView()
     window.show_view(start_view)
     arcade.run()
 
