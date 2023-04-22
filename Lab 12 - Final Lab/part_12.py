@@ -13,9 +13,11 @@ MOVEMENT_SPEED = 5
 class StartView(arcade.View):
 
     def on_show_view(self):
-        arcade.set_background_color(arcade.color.BLACK)
+        """Background"""
+        arcade.set_background_color(arcade.color.WHITE)
 
     def on_draw(self):
+        """Place the text"""
         self.clear()
 
         arcade.draw_text("MAZE ADVENTURE", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 200,
@@ -28,7 +30,7 @@ class StartView(arcade.View):
                          arcade.color.RED, font_size=30, anchor_x="center")
 
     def on_key_press(self, key, modifiers):
-        """Called whenever a key is pressed. """
+        """Press Enter to start the game/"""
         if key == arcade.key.ENTER:
             game_view = GameView()
             game_view.setup()
@@ -311,14 +313,14 @@ def setup_room_1():
     coordinate_list = [[1150, 360],
                        [930, 260],
                        [640, 40],
-                       [550, 250],
+                       [540, 240],
                        [50, 150],
                        [50, 550],
                        [1150, 550],
                        [1150, 150],
                        [260, 450],
                        [460, 470],
-                       [750, 560]]
+                       [750, 570]]
     # Loop through coordinates
     for coordinate in coordinate_list:
         bomb = arcade.Sprite("boxExplosive.png", SPRITE_SCALING/2)
@@ -902,22 +904,22 @@ def setup_room_3():
     for i in range(NUMBER_OF_COINS):
         coin = arcade.Sprite("foliagePack_001.png", SPRITE_SCALING)
 
-        # Boolean variable coin placement
+        # Boolean variable placement
         coin_placed_successfully = False
 
         while not coin_placed_successfully:
-            # Position the coin
+            # Position the flowers
             coin.center_x = random.randrange(SCREEN_WIDTH - 25)
             coin.center_y = random.randrange(SCREEN_HEIGHT - 25)
 
-            # See if the coin is hitting a wall
+            # See if the flower is hitting a wall
             wall_hit_list = arcade.check_for_collision_with_list(coin, room.wall_list)
-            # See if the coin is hitting another coin
+            # See if the flower is hitting another flower
             coin_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list)
             if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
                 # It is!
                 coin_placed_successfully = True
-        # Add the coin to the lists
+        # Add the flowers to the lists
         room.coin_list.append(coin)
 
     # Mushroom, image from https://kenney.nl
@@ -928,25 +930,25 @@ def setup_room_3():
         star_placed_successfully = False
 
         while not star_placed_successfully:
-            # Position the stars
+            # Position the mushrooms
             star.center_x = random.randrange(SCREEN_WIDTH - 25)
             star.center_y = random.randrange(SCREEN_HEIGHT - 25)
 
-            # See if the star is hitting a wall
+            # See if the mushroom is hitting a wall
             wall_hit_list = arcade.check_for_collision_with_list(star, room.wall_list)
-            # See if the star is hitting another star or coin
+            # See if the mushroom is hitting another star or coin
             star_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list, room.star_list)
             if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
                 # It is!
                 star_placed_successfully = True
-        # Add the star to the lists
+        # Add the mushrooms to the lists
         room.star_list.append(star)
 
         # Bomb, image from https://kenney.nl
         coordinate_list = [[40, 40],
                            [1100, 330],
                            [860, 140],
-                           [450, 40],
+                           [450, 30],
                            [440, 360],
                            [40, 560],
                            [640, 440],
@@ -1218,7 +1220,7 @@ def setup_room_4():
 
             # See if the fish is hitting a wall
             wall_hit_list = arcade.check_for_collision_with_list(coin, room.wall_list)
-            # See if the fish is hitting another coin
+            # See if the fish is hitting another fish
             coin_hit_list = arcade.check_for_collision_with_list(coin, room.coin_list)
             if len(wall_hit_list) == 0 and len(coin_hit_list) == 0:
                 # It is!
@@ -1582,7 +1584,7 @@ def setup_room_5():
                        [760, 500],
                        [800, 340],
                        [660, 130],
-                       [1050, 430],
+                       [940, 460],
                        [930, 240],
                        [1140, 350],
                        [50, 50],
@@ -1593,7 +1595,14 @@ def setup_room_5():
                        [160, 230],
                        [500, 130],
                        [850, 250],
-                       [1160, 560]]
+                       [1160, 550],
+                       [200, 80],
+                       [160, 560],
+                       [650, 550],
+                       [650, 350],
+                       [1050, 350],
+                       [1050, 275],
+                       [1060, 130]]
     # Loop through coordinates
     for coordinate in coordinate_list:
         bomb = arcade.Sprite("fireball.png", SPRITE_SCALING)
@@ -1623,8 +1632,12 @@ class GameView(arcade.View):
         self.bomb_list = None
         self.physics_engine = None
 
-        # Sound
-        self.laser_sound = arcade.load_sound("laser.wav")
+        # Bomb explosion from opengameart.org
+        self.bomb_explosion = arcade.load_sound("8bit_bomb_explosion.wav")
+        # Coin pickup from opengameart.org
+        self.click = arcade.load_sound("click.wav")
+        # Chime from opengameart.org
+        self.chime = arcade.load_sound("ball.sideborder.wav")
 
     def setup(self):
         """ Set up the game and initialize the variables. """
@@ -1724,19 +1737,16 @@ class GameView(arcade.View):
 
         # Loop through each colliding sprite, remove it, and add to the score.
         for coin in coins_hit_list:
-            arcade.play_sound(self.laser_sound)
+            arcade.play_sound(self.click)
             coin.remove_from_sprite_lists()
             self.score += 1
         for star in star_hit_list:
-            arcade.play_sound(self.laser_sound)
+            arcade.play_sound(self.chime)
             star.remove_from_sprite_lists()
             self.score += 3
+        # Bomb hits end the game
         for bomb in bomb_hit_list:
-            arcade.play_sound(self.laser_sound)
-            bomb.remove_from_sprite_lists()
-            self.score -= 10
-
-        if self.score < 0:
+            arcade.play_sound(self.bomb_explosion)
             view = GameOverView()
             self.window.show_view(view)
 
@@ -1757,7 +1767,7 @@ class GameView(arcade.View):
                                                              self.rooms[self.current_room].wall_list)
             self.player_sprite.center_x = 0
         if self.player_sprite.center_x < 0 and self.current_room == 1:
-            self.current_room = 1
+            self.current_room = 0
             self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite,
                                                              self.rooms[self.current_room].wall_list)
             self.player_sprite.center_x = SCREEN_WIDTH
@@ -1767,7 +1777,7 @@ class GameView(arcade.View):
                                                              self.rooms[self.current_room].wall_list)
             self.player_sprite.center_x = 0
         if self.player_sprite.center_x < 0 and self.current_room == 2:
-            self.current_room = 2
+            self.current_room = 1
             self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite,
                                                              self.rooms[self.current_room].wall_list)
             self.player_sprite.center_x = SCREEN_WIDTH
@@ -1777,16 +1787,16 @@ class GameView(arcade.View):
                                                              self.rooms[self.current_room].wall_list)
             self.player_sprite.center_x = 0
         if self.player_sprite.center_x < 0 and self.current_room == 3:
-            self.current_room = 3
+            self.current_room = 2
             self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite,
                                                              self.rooms[self.current_room].wall_list)
             self.player_sprite.center_x = SCREEN_WIDTH
         if self.player_sprite.center_x < 0 and self.current_room == 4:
-            self.current_room = 4
+            self.current_room = 3
             self.physics_engine = arcade.PhysicsEngineSimple(self.player_sprite,
                                                              self.rooms[self.current_room].wall_list)
             self.player_sprite.center_x = SCREEN_WIDTH
-        elif self.player_sprite.center_x > SCREEN_WIDTH and self.current_room == 4:
+        if self.player_sprite.center_x > SCREEN_WIDTH and self.current_room == 4:
             view = WinnerView()
             self.window.show_view(view)
 
@@ -1823,8 +1833,10 @@ class WinnerView(arcade.View):
         arcade.set_background_color(arcade.color.BLACK)
 
     def on_draw(self):
+        """Add text"""
         self.clear()
-        arcade.draw_text("You win!", SCREEN_WIDTH/2 - 250, SCREEN_HEIGHT/2, arcade.color.WHITE, 100)
+
+        arcade.draw_text("You win!", SCREEN_WIDTH/2 - 250, SCREEN_HEIGHT/2, arcade.color.FLAMINGO_PINK, 100)
         arcade.draw_text("Press enter to play again.", SCREEN_WIDTH/2 - 350, SCREEN_HEIGHT/2 - 100,
                          arcade.color.WHITE, 50)
         arcade.draw_text("Press Esc to Quit", SCREEN_WIDTH/2 - 250, SCREEN_HEIGHT/2 - 200, arcade.color.WHITE, 50)
@@ -1841,7 +1853,7 @@ class WinnerView(arcade.View):
 def main():
     """ Main function """
     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT)
-    start_view = WinnerView()
+    start_view = StartView()
     window.show_view(start_view)
     arcade.run()
 
