@@ -14,7 +14,7 @@ class StartView(arcade.View):
 
     def on_show_view(self):
         """Background"""
-        arcade.set_background_color(arcade.color.WHITE)
+        arcade.set_background_color(arcade.color.BLACK)
 
     def on_draw(self):
         """Place the text"""
@@ -1836,7 +1836,7 @@ class WinnerView(arcade.View):
         """Add text"""
         self.clear()
 
-        arcade.draw_text("You win!", SCREEN_WIDTH/2 - 250, SCREEN_HEIGHT/2, arcade.color.FLAMINGO_PINK, 100)
+        arcade.draw_text("You win!", SCREEN_WIDTH/2 - 250, SCREEN_HEIGHT/2, arcade.color.BARBIE_PINK, 100)
         arcade.draw_text("Press enter to play again.", SCREEN_WIDTH/2 - 350, SCREEN_HEIGHT/2 - 100,
                          arcade.color.WHITE, 50)
         arcade.draw_text("Press Esc to Quit", SCREEN_WIDTH/2 - 250, SCREEN_HEIGHT/2 - 200, arcade.color.WHITE, 50)
